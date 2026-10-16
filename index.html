@@ -1,0 +1,3266 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <title>Sabina Karimova — Portfolio</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <meta
+        name="description"
+        content="Portfolio de Sabina Karimova, étudiante Pré-MSc Pro à EPITECH Nantes, à la recherche d'une alternance IT en contrat d'apprentissage dès janvier 2027 : projet PHP/MariaDB en cours, jeux en Python et JavaScript, CV numérique."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* Layout: deep-space stage, same family as the digital CV —
+           cinematic hero with a live 3D Earth, wide glass showcases. */
+
+        :root {
+            --bg: #03060c;
+            --bg-raised: #070d18;
+            --glass: rgba(14, 24, 42, 0.55);
+            --glass-strong: rgba(14, 24, 42, 0.78);
+            --line: rgba(160, 190, 230, 0.14);
+            --line-strong: rgba(160, 190, 230, 0.32);
+            --text: #f3f6fb;
+            --text-soft: #b8c4d4;
+            --text-muted: #7f8ca0;
+            --accent: #9fc3ff;
+            --accent-strong: #5fa8ff;
+            --glow: #7c5cff;
+            --ok: #6fe3a0;
+
+            --font-display: "Manrope", "Segoe UI", system-ui, sans-serif;
+            --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+
+            --radius: 22px;
+            --radius-small: 14px;
+            --max: 1180px;
+
+            color-scheme: dark;
+        }
+
+
+        /* ---------- base ---------- */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.game-open {
+            overflow: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin: 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            text-wrap: balance;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: var(--max);
+            margin-inline: auto;
+            padding-inline: 20px;
+        }
+
+
+        /* ---------- space background ---------- */
+
+        #stars {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .space-photo {
+            position: fixed;
+            inset: -4%;
+            z-index: 0;
+            pointer-events: none;
+            background: url("assets/img/nebula.jpg") center / cover no-repeat;
+            opacity: 0.32;
+            filter: saturate(1.15);
+            animation: drift 90s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift {
+            to {
+                transform: scale(1.08) translate(-1.5%, 1%);
+            }
+        }
+
+        #galaxy {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        /* Keeps text readable over the bright galaxy core. */
+        .galaxy-veil {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(3, 6, 12, 0.72) 0%, rgba(3, 6, 12, 0.35) 45%, rgba(3, 6, 12, 0.1) 75%),
+                linear-gradient(180deg, transparent 60%, rgba(3, 6, 12, 0.55));
+        }
+
+        .aurora {
+            position: fixed;
+            inset: -20% -10% auto;
+            height: 90vh;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(40% 50% at 78% 30%, rgba(95, 168, 255, 0.18), transparent 70%),
+                radial-gradient(35% 45% at 18% 10%, rgba(124, 92, 255, 0.16), transparent 70%);
+            filter: blur(10px);
+        }
+
+        main,
+        .nav,
+        footer {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        /* ---------- nav ---------- */
+
+        .nav {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 30;
+            padding-block: 14px;
+            backdrop-filter: blur(14px) saturate(1.2);
+            -webkit-backdrop-filter: blur(14px) saturate(1.2);
+            background: linear-gradient(rgba(3, 6, 12, 0.85), rgba(3, 6, 12, 0.55));
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            display: grid;
+            place-items: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            border: 1px solid var(--line-strong);
+            background: linear-gradient(145deg, rgba(95, 168, 255, 0.25), rgba(124, 92, 255, 0.15));
+            font-family: var(--font-display);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-size: 0.88rem;
+            color: var(--text-soft);
+        }
+
+        .nav-links a {
+            position: relative;
+            padding-block: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -2px;
+            height: 1px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang {
+            display: flex;
+            padding: 3px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+        }
+
+        .lang button {
+            padding: 4px 10px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .lang button[aria-pressed="true"] {
+            background: var(--text);
+            color: var(--bg);
+        }
+
+
+        /* ---------- buttons ---------- */
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 48px;
+            padding: 0 22px;
+            border-radius: 999px;
+            border: 1px solid var(--line-strong);
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+            background: rgba(159, 195, 255, 0.08);
+        }
+
+        .btn-primary {
+            border-color: transparent;
+            background: linear-gradient(135deg, #ffffff, #cfe0ff);
+            color: #04101f;
+            box-shadow: 0 10px 30px -10px rgba(159, 195, 255, 0.55);
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ffffff, #e2ecff);
+            box-shadow: 0 14px 40px -10px rgba(159, 195, 255, 0.75);
+        }
+
+        .btn-small {
+            min-height: 38px;
+            padding: 0 16px;
+            font-size: 0.82rem;
+        }
+
+
+        /* ---------- hero ---------- */
+
+        .hero {
+            padding-block: 72px 40px;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+            gap: 40px;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px 7px 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: var(--glass);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-soft);
+        }
+
+        .pulse {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ok);
+            box-shadow: 0 0 0 0 rgba(111, 227, 160, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            70% {
+                box-shadow: 0 0 0 10px rgba(111, 227, 160, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(111, 227, 160, 0);
+            }
+        }
+
+        .hero-photo {
+            position: relative;
+            display: block;
+            width: 112px;
+            height: 112px;
+            margin-bottom: 22px;
+            padding: 3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-strong), var(--glow));
+            box-shadow: 0 0 0 6px rgba(95, 168, 255, 0.12), 0 18px 50px -12px rgba(95, 168, 255, 0.55);
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--bg);
+        }
+
+        .hero-name {
+            margin-top: 22px;
+            font-size: clamp(3rem, 8vw, 6.2rem);
+            font-weight: 800;
+            line-height: 0.95;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-name span {
+            display: block;
+            background: linear-gradient(100deg, #ffffff 10%, #a9c9ff 55%, #b6a6ff 95%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-role {
+            margin-top: 22px;
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .hero-motto {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 18px;
+            padding: 10px 18px 10px 14px;
+            border: 1px solid var(--line-strong);
+            border-left: 3px solid var(--accent-strong);
+            border-radius: 14px;
+            background: var(--glass);
+            font-family: var(--font-display);
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .hero-motto .globe-icon {
+            font-size: 1.3em;
+            line-height: 1;
+        }
+
+        .hero-motto .motto-text {
+            background: linear-gradient(100deg, #ffffff 10%, #a9c9ff 55%, #b6a6ff 95%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text {
+            max-width: 52ch;
+            margin-top: 14px;
+            font-size: 1.05rem;
+            color: var(--text-soft);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .hero-visual {
+            position: relative;
+            aspect-ratio: 1;
+            width: 100%;
+            max-width: 560px;
+            justify-self: center;
+        }
+
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            inset: 8%;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(95, 168, 255, 0.35), transparent 65%);
+            filter: blur(30px);
+        }
+
+        #hero-earth {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            cursor: grab;
+            touch-action: pan-y;
+        }
+
+        #hero-earth.is-dragging {
+            cursor: grabbing;
+        }
+
+        .drag-hint {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            padding: 6px 14px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--glass);
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            white-space: nowrap;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .hero-visual.was-dragged .drag-hint {
+            opacity: 0;
+        }
+
+        .earth-fallback {
+            position: absolute;
+            inset: 14%;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.25), transparent 45%),
+                url("assets/img/earth-blue-marble.jpg") center / 200% 100%;
+            box-shadow: inset -40px -30px 80px rgba(0, 0, 0, 0.85), 0 0 80px rgba(95, 168, 255, 0.35);
+            transition: opacity 0.8s ease;
+        }
+
+        .hero-visual.is-live .earth-fallback {
+            opacity: 0;
+        }
+
+        .orbit-chip {
+            position: absolute;
+            pointer-events: none;
+            padding: 8px 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: var(--glass-strong);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 0.82rem;
+            font-weight: 600;
+            white-space: nowrap;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orbit-chip:nth-child(3) { top: 12%; left: 2%; }
+        .orbit-chip:nth-child(4) { top: 22%; right: 0; animation-delay: -1.5s; }
+        .orbit-chip:nth-child(5) { bottom: 22%; left: -2%; animation-delay: -3s; }
+        .orbit-chip:nth-child(6) { bottom: 10%; right: 6%; animation-delay: -4.5s; }
+
+        @keyframes float {
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            margin-top: 56px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            overflow: hidden;
+        }
+
+        .stat {
+            padding: 22px 24px;
+            border-right: 1px solid var(--line);
+        }
+
+        .stat:last-child {
+            border-right: 0;
+        }
+
+        .stat strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+
+        /* ---------- sections ---------- */
+
+        .section {
+            padding-block: 100px 20px;
+            scroll-margin-top: 70px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            margin-top: 14px;
+            font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+            font-weight: 800;
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .section-lead {
+            max-width: 60ch;
+            margin-top: 16px;
+            color: var(--text-soft);
+            font-size: 1.05rem;
+        }
+
+        .section-head {
+            margin-bottom: 48px;
+        }
+
+
+        /* ---------- projects ---------- */
+
+        .project {
+            position: relative;
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+            gap: 44px;
+            align-items: center;
+            padding: 28px;
+            margin-bottom: 32px;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            background:
+                linear-gradient(160deg, rgba(95, 168, 255, 0.07), transparent 40%),
+                var(--glass);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            overflow: hidden;
+        }
+
+        .project.reverse {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+        }
+
+        .project.reverse .media {
+            order: 2;
+        }
+
+        .media {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 1px solid var(--line-strong);
+            border-radius: 18px;
+            background: #02050a;
+            aspect-ratio: 4 / 3;
+            max-width: 100%;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.02);
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .media > img:first-child {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .media:hover > img:first-child {
+            transform: scale(1.05);
+        }
+
+        .media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 55%, rgba(2, 5, 10, 0.75));
+            pointer-events: none;
+        }
+
+        .media-inset {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 1;
+            width: 34%;
+            height: auto;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .play {
+            position: absolute;
+            left: 20px;
+            bottom: 20px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .play-icon {
+            display: grid;
+            place-items: center;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #ffffff;
+            color: #04101f;
+            font-size: 1rem;
+            box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .media:hover .play-icon {
+            transform: scale(1.08);
+            box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.12);
+        }
+
+        .project-body {
+            min-width: 0;
+        }
+
+        .project-kicker {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 4px 10px;
+            border: 1px solid rgba(111, 227, 160, 0.35);
+            border-radius: 999px;
+            color: var(--ok);
+            font-size: 0.74rem;
+        }
+
+        .status-wip {
+            border-color: rgba(255, 196, 92, 0.4);
+            color: #ffc45c;
+        }
+
+        .media-wip {
+            display: grid;
+            place-items: center;
+            padding: 8%;
+            background:
+                radial-gradient(circle at 30% 20%, rgba(124, 92, 255, 0.35), transparent 60%),
+                radial-gradient(circle at 80% 90%, rgba(95, 168, 255, 0.25), transparent 55%),
+                #050a14;
+        }
+
+        .media-wip::after {
+            display: none;
+        }
+
+        .wip-window {
+            width: 100%;
+            border: 1px solid var(--line-strong);
+            border-radius: 14px;
+            background: rgba(7, 13, 24, 0.85);
+            overflow: hidden;
+        }
+
+        .wip-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--line);
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .wip-bar i {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--line-strong);
+        }
+
+        .wip-bar span {
+            margin-left: 8px;
+        }
+
+        .wip-body {
+            display: grid;
+            gap: 10px;
+            padding: 28px 22px 30px;
+            text-align: center;
+        }
+
+        .wip-body strong {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--accent);
+        }
+
+        .wip-body span {
+            color: var(--text-soft);
+            font-size: 0.9rem;
+        }
+
+        .wip-body em {
+            justify-self: center;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 196, 92, 0.4);
+            border-radius: 999px;
+            color: #ffc45c;
+            font-style: normal;
+            font-size: 0.78rem;
+        }
+
+        .status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .project h3 {
+            margin-top: 14px;
+            font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.05;
+        }
+
+        .project-text {
+            margin-top: 14px;
+            color: var(--text-soft);
+        }
+
+        .evolution {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+
+        .evolution span {
+            padding: 6px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-soft);
+        }
+
+        .evolution b {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .evolution .now {
+            border-color: rgba(159, 195, 255, 0.45);
+            color: var(--text);
+            background: rgba(159, 195, 255, 0.08);
+        }
+
+        .features {
+            display: grid;
+            gap: 10px;
+            margin: 22px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .features li {
+            position: relative;
+            padding-left: 28px;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+        }
+
+        .features li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.45em;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent) 0 3px, rgba(159, 195, 255, 0.18) 4px);
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 22px;
+        }
+
+        .tags span {
+            padding: 5px 12px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--line);
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-soft);
+        }
+
+        .project-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .credit {
+            margin-top: 16px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+
+        /* ---------- skills ---------- */
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .glass-card {
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-3px);
+        }
+
+        .card-icon {
+            display: grid;
+            place-items: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(95, 168, 255, 0.3), rgba(124, 92, 255, 0.2));
+            border: 1px solid var(--line-strong);
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+
+        .glass-card h3 {
+            margin-top: 18px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .skill-list {
+            display: grid;
+            gap: 12px;
+            margin: 18px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .skill-list li {
+            display: grid;
+            gap: 2px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .skill-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .skill-list strong {
+            font-weight: 600;
+        }
+
+        .skill-list small {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .strengths {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .strength {
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: linear-gradient(160deg, rgba(124, 92, 255, 0.08), transparent 60%), var(--glass);
+        }
+
+        .strength small {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .strength h3 {
+            margin-top: 8px;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .strength p {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+
+
+        /* ---------- CV ---------- */
+
+        .cv-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .cv-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .cv-main {
+            min-width: 0;
+        }
+
+        .cv-subtitle {
+            margin: 0 0 18px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .cv-main .timeline + .cv-subtitle {
+            margin-top: 22px;
+        }
+
+        .cv-side {
+            position: sticky;
+            top: 96px;
+            display: grid;
+            gap: 20px;
+            min-width: 0;
+        }
+
+        .timeline {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(var(--accent-strong), var(--glow), rgba(124, 92, 255, 0.1));
+        }
+
+        .timeline > li {
+            position: relative;
+            padding: 0 0 22px 52px;
+        }
+
+        .timeline > li::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 22px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg);
+            border: 2px solid var(--accent);
+        }
+
+        .timeline > li.now::before {
+            background: var(--accent);
+            box-shadow: 0 0 0 6px rgba(159, 195, 255, 0.18), 0 0 20px var(--accent);
+        }
+
+        .step {
+            padding: 18px 22px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-small);
+            background: var(--glass);
+        }
+
+        .step time {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .step strong {
+            display: block;
+            margin-top: 4px;
+            font-family: var(--font-display);
+            font-size: 1.08rem;
+        }
+
+        .step span {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .step-top {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .step-tag {
+            padding: 2px 10px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--text-soft);
+        }
+
+        .tasks {
+            display: grid;
+            gap: 6px;
+            margin: 12px 0 0;
+            padding: 12px 0 0;
+            border-top: 1px solid var(--line);
+            list-style: none;
+        }
+
+        .tasks li {
+            position: relative;
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: var(--text-soft);
+        }
+
+        .tasks li::before {
+            content: "";
+            position: absolute;
+            left: 2px;
+            top: 0.65em;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .facts {
+            display: grid;
+            gap: 0;
+            margin: 14px 0 0;
+        }
+
+        .facts div {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding-block: 11px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .facts div:last-child {
+            border-bottom: 0;
+        }
+
+        .facts dt {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        .facts dd {
+            margin: 0;
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .lang-list {
+            margin-top: 8px;
+        }
+
+        .lang-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 6px 12px;
+            align-items: center;
+            padding-block: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .lang-row:last-child {
+            border-bottom: 0;
+        }
+
+        .lang-row b {
+            font-weight: 600;
+        }
+
+        .lang-row em {
+            font-style: normal;
+            font-family: var(--font-display);
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .meter {
+            grid-column: 1 / -1;
+            height: 5px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.07);
+            overflow: hidden;
+        }
+
+        .meter i {
+            display: block;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--accent-strong), var(--glow));
+        }
+
+
+        .cv-preview {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            border: 1px solid var(--line-strong);
+            border-radius: var(--radius);
+        }
+
+        .cv-preview img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .cv-preview:hover img {
+            transform: scale(1.05);
+        }
+
+        .cv-preview > span {
+            position: absolute;
+            inset: auto 0 0 0;
+            display: grid;
+            gap: 2px;
+            padding: 40px 18px 16px;
+            background: linear-gradient(transparent, rgba(2, 5, 10, 0.92));
+        }
+
+        .cv-preview small {
+            color: var(--text-soft);
+        }
+
+
+        /* ---------- contact ---------- */
+
+        .contact-card {
+            position: relative;
+            padding: clamp(28px, 5vw, 56px);
+            border-radius: 32px;
+            border: 1px solid var(--line-strong);
+            background:
+                radial-gradient(60% 80% at 100% 0%, rgba(124, 92, 255, 0.25), transparent 60%),
+                radial-gradient(60% 80% at 0% 100%, rgba(95, 168, 255, 0.2), transparent 60%),
+                var(--glass-strong);
+            overflow: hidden;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: 36px;
+            align-items: center;
+        }
+
+        .contact-card h2 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 800;
+            letter-spacing: -0.045em;
+            line-height: 1.02;
+        }
+
+        .contact-card p {
+            margin-top: 16px;
+            color: var(--text-soft);
+            max-width: 46ch;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 16px 18px;
+            border: 1px solid var(--line);
+            border-radius: var(--radius-small);
+            background: rgba(3, 6, 12, 0.5);
+        }
+
+        .contact-item small {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        .contact-item strong {
+            display: block;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .contact-item > div {
+            min-width: 0;
+        }
+
+        .copy {
+            flex-shrink: 0;
+            padding: 7px 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: transparent;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .copy:hover {
+            border-color: var(--accent);
+        }
+
+        .socials {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        footer {
+            padding-block: 60px 40px;
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        footer .wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px 24px;
+        }
+
+
+        /* ---------- entrance (hero only, from a visible state) ---------- */
+
+        .rise {
+            animation: rise 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+            animation-delay: var(--d, 0s);
+        }
+
+        @keyframes rise {
+            from {
+                transform: translateY(18px);
+                filter: blur(4px);
+                opacity: 0.4;
+            }
+        }
+
+
+        /* ---------- game modal ---------- */
+
+        .game-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: grid;
+            place-items: center;
+            padding: 16px;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+        }
+
+        .game-modal.open {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .game-modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 5, 10, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .game-dialog {
+            position: relative;
+            width: min(940px, 100%);
+            max-height: calc(100vh - 32px);
+            overflow: auto;
+            padding: 20px;
+            border: 1px solid var(--line-strong);
+            border-radius: 22px;
+            background: #0a111c;
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+        }
+
+        .game-dialog-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 14px;
+        }
+
+        .game-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .game-dialog-header h2 {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        .game-close {
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--line-strong);
+            border-radius: 50%;
+            background: transparent;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .game-stage-wrap {
+            width: min(100%, max(300px, calc((100vh - 260px) * 4 / 3)));
+            margin: 0 auto;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            overflow: hidden;
+            background: #03060d;
+        }
+
+        .game-dialog:has(.hangman-panel) .game-stage-wrap {
+            width: min(100%, max(300px, calc((100vh - 380px) * 4 / 3)));
+        }
+
+        .game-stage-wrap canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4 / 3;
+            touch-action: none;
+        }
+
+        .game-stage-wrap.is-3d {
+            position: relative;
+        }
+
+        .game-gl-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .game-stage-wrap.is-3d #game-canvas {
+            position: relative;
+            background: transparent;
+        }
+
+        .game-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px 20px;
+            margin-top: 14px;
+        }
+
+        .game-help {
+            max-width: 460px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+        }
+
+        .game-mobile-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .game-control-button {
+            min-width: 46px;
+            min-height: 42px;
+            padding: 0 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            touch-action: none;
+        }
+
+        .game-control-button:hover,
+        .game-control-button:active {
+            border-color: var(--accent);
+        }
+
+        .hangman-panel {
+            margin-top: 14px;
+        }
+
+        .hangman-keys {
+            display: grid;
+            grid-template-columns: repeat(13, 1fr);
+            gap: 6px;
+        }
+
+        .hangman-key {
+            min-height: 40px;
+            border: 1px solid var(--line-strong);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            font-family: var(--font-display);
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .hangman-key:hover:not(:disabled) {
+            border-color: var(--accent);
+        }
+
+        .hangman-key:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .hangman-key.is-hit {
+            opacity: 1;
+            border-color: rgba(111, 227, 160, 0.6);
+            background: rgba(111, 227, 160, 0.16);
+            color: #c9f7d5;
+        }
+
+        .hangman-key.is-miss {
+            opacity: 0.5;
+            border-color: rgba(255, 110, 130, 0.45);
+            color: #ffb3ba;
+            text-decoration: line-through;
+        }
+
+        .hangman-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .hangman-action {
+            min-height: 38px;
+            padding: 0 16px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: transparent;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .hangman-action:disabled {
+            opacity: 0.4;
+            cursor: default;
+        }
+
+        .hangman-next.is-ready {
+            border-color: transparent;
+            background: #ffffff;
+            color: #04101f;
+        }
+
+
+        /* ---------- responsive ---------- */
+
+        @media (max-width: 1000px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-grid,
+            .project,
+            .project.reverse,
+            .cv-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project.reverse .media {
+                order: 0;
+            }
+
+            .hero-visual {
+                max-width: 440px;
+            }
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+            .strengths {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .cv-side {
+                position: static;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero {
+                padding-top: 40px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .stat:nth-child(2) {
+                border-right: 0;
+            }
+
+            .stat:nth-child(-n + 2) {
+                border-bottom: 1px solid var(--line);
+            }
+
+            .project {
+                padding: 16px;
+                gap: 24px;
+            }
+
+            .strengths {
+                grid-template-columns: 1fr;
+            }
+
+            .orbit-chip {
+                font-size: 0.72rem;
+                padding: 6px 10px;
+            }
+
+            .nav-right .btn {
+                display: none;
+            }
+
+            .hangman-keys {
+                grid-template-columns: repeat(7, 1fr);
+            }
+
+            .hangman-key {
+                min-height: 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="space-photo" aria-hidden="true"></div>
+    <canvas id="galaxy" aria-hidden="true"></canvas>
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div class="galaxy-veil" aria-hidden="true"></div>
+    <div class="aurora" aria-hidden="true"></div>
+
+
+    <!-- NAV -->
+
+    <header class="nav">
+        <div class="wrap">
+
+            <a class="logo" href="#top" aria-label="Sabina Karimova">SK</a>
+
+            <nav class="nav-links" aria-label="Sections">
+                <a href="#projets" data-fr="Projets" data-en="Projects">Projets</a>
+                <a href="#competences" data-fr="Compétences" data-en="Skills">Compétences</a>
+                <a href="#cv" data-fr="CV" data-en="Resume">CV</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="nav-right">
+                <a class='btn btn-small cv-link' data-en='Digital resume ↗' data-fr='CV numérique ↗' href='/cv'>CV numérique ↗</a>
+
+                <div class="lang" role="group" aria-label="Langue / Language">
+                    <button type="button" id="lang-fr" aria-pressed="true">FR</button>
+                    <button type="button" id="lang-en" aria-pressed="false">EN</button>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <main id="top">
+
+        <!-- HERO -->
+
+        <section class="hero">
+            <div class="wrap">
+
+                <div class="hero-grid">
+
+                    <div>
+                        <span class="hero-photo rise" style="--d: 0s">
+                            <img src="assets/img/sabina.webp" alt="Photo de Sabina Karimova" data-alt-fr="Photo de Sabina Karimova" data-alt-en="Photo of Sabina Karimova" width="320" height="320">
+                        </span>
+
+                        <span class="badge rise" style="--d: .05s">
+                            <i class="pulse" aria-hidden="true"></i>
+                            <span data-fr="Alternance IT · Contrat d'apprentissage · janvier 2027" data-en="IT apprenticeship contract · January 2027">Alternance IT · Contrat d'apprentissage · janvier 2027</span>
+                        </span>
+
+                        <h1 class="hero-name rise" style="--d: .15s">
+                            Sabina
+                            <span>Karimova</span>
+                        </h1>
+
+                        <p class="hero-role rise" style="--d: .3s" data-fr="Développeuse en formation · EPITECH Nantes" data-en="Developer in training · EPITECH Nantes">
+                            Développeuse en formation · EPITECH Nantes
+                        </p>
+
+                        <p class="hero-motto rise" style="--d: .35s">
+                            <span class="globe-icon" aria-hidden="true">🌍</span>
+                            <span class="motto-text" data-fr="« Avec l'IT, on peut diriger le monde. »" data-en="“With IT, you can lead the world.”">« Avec l'IT, on peut diriger le monde. »</span>
+                        </p>
+
+                        <p
+                            class="hero-text rise"
+                            style="--d: .4s"
+                            data-fr="Après plusieurs années dans la douane, le transit international et l'enseignement, je construis aujourd'hui des sites web, des jeux et, en équipe, une plateforme PHP/MariaDB. Je recherche un contrat d'apprentissage à partir de janvier 2027."
+                            data-en="After several years in customs, international freight and teaching, I now build websites, games and, as part of a team, a PHP/MariaDB platform. I'm looking for an apprenticeship contract starting January 2027."
+                        >
+                            Après plusieurs années dans la douane, le transit international et l'enseignement,
+                            je construis aujourd'hui des sites web, des jeux et, en équipe, une plateforme PHP/MariaDB.
+                            Je recherche un contrat d'apprentissage à partir de janvier 2027.
+                        </p>
+
+                        <div class="hero-actions rise" style="--d: .5s">
+                            <a class="btn btn-primary" href="#projets">
+                                <span data-fr="Découvrir mes projets" data-en="Explore my projects">Découvrir mes projets</span>
+                                <span aria-hidden="true">↓</span>
+                            </a>
+
+                            <a class="btn" href="#contact" data-fr="Me contacter" data-en="Contact me">Me contacter</a>
+                        </div>
+                    </div>
+
+                    <div class="hero-visual rise" style="--d: .25s" id="hero-visual">
+                        <div class="earth-fallback"></div>
+                        <canvas id="hero-earth" role="img" aria-label="Terre en 3D, à faire tourner avec la souris ou le doigt"></canvas>
+                        <span class="orbit-chip">Python</span>
+                        <span class="orbit-chip">JavaScript</span>
+                        <span class="orbit-chip">Three.js · WebGL</span>
+                        <span class="orbit-chip">HTML · CSS</span>
+                        <span class="drag-hint" data-fr="↔ Faites tourner la Terre" data-en="↔ Drag to spin the Earth">↔ Faites tourner la Terre</span>
+                    </div>
+
+                </div>
+
+
+                <div class="stats rise" style="--d: .6s">
+
+                    <div class="stat">
+                        <strong data-count="3">3</strong>
+                        <span data-fr="projets publiés" data-en="published projects">projets publiés</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong data-count="2">2</strong>
+                        <span data-fr="jeux jouables ici" data-en="games playable here">jeux jouables ici</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong data-count="8" data-suffix=" ans">8 ans</strong>
+                        <span data-fr="d'expérience professionnelle" data-en="of professional experience">d'expérience professionnelle</span>
+                    </div>
+
+                    <div class="stat">
+                        <strong data-count="5">5</strong>
+                        <span data-fr="langues parlées" data-en="languages spoken">langues parlées</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- PROJECTS -->
+
+        <section class="section" id="projets">
+            <div class="wrap">
+
+                <div class="section-head">
+                    <span class="eyebrow" data-fr="Projets sélectionnés" data-en="Selected work">Projets sélectionnés</span>
+
+                    <h2 class="section-title" data-fr="Ce que j'ai construit" data-en="What I've built">Ce que j'ai construit</h2>
+
+                    <p
+                        class="section-lead"
+                        data-fr="Mon projet EPITECH en cours, puis deux jeux écrits d'abord en Python avec Pygame et recréés pour le web. Cliquez sur une image pour jouer."
+                        data-en="My ongoing EPITECH project, then two games first written in Python with Pygame and rebuilt for the web. Click an image to play."
+                    >
+                        Mon projet EPITECH en cours, puis deux jeux écrits d'abord en Python avec Pygame
+                        et recréés pour le web. Cliquez sur une image pour jouer.
+                    </p>
+                </div>
+
+
+                <!-- JobBoard -->
+
+                <article class="project">
+
+                    <div class="media media-wip" aria-hidden="true">
+                        <div class="wip-window">
+                            <div class="wip-bar"><i></i><i></i><i></i><span>JobBoard</span></div>
+                            <div class="wip-body">
+                                <strong>&lt;?php</strong>
+                                <span>PHP · MariaDB · Git/GitHub</span>
+                                <em data-fr="Projet en cours de développement" data-en="Work in progress">Projet en cours de développement</em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Web · Projet d'équipe EPITECH" data-en="Web · EPITECH team project">Web · Projet d'équipe EPITECH</span>
+                            <span class="status status-wip" data-fr="En cours" data-en="In progress">En cours</span>
+                        </div>
+
+                        <h3>JobBoard</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Développement en équipe d'une plateforme d'offres d'alternance, de stage et d'emploi junior."
+                            data-en="Team development of a job board for apprenticeships, internships and junior positions."
+                        >
+                            Développement en équipe d'une plateforme d'offres d'alternance,
+                            de stage et d'emploi junior.
+                        </p>
+
+                        <ul class="features">
+                            <li data-fr="Travail sur l'authentification utilisateur" data-en="Working on user authentication">Travail sur l'authentification utilisateur</li>
+                            <li data-fr="Travail sur la gestion des données (MariaDB)" data-en="Working on data management (MariaDB)">Travail sur la gestion des données (MariaDB)</li>
+                            <li data-fr="Travail en équipe avec Git/GitHub" data-en="Teamwork with Git/GitHub">Travail en équipe avec Git/GitHub</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>PHP</span>
+                            <span>MariaDB</span>
+                            <span>Git · GitHub</span>
+                            <span data-fr="Authentification" data-en="Authentication">Authentification</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Dodge Game -->
+
+                <article class="project reverse">
+
+                    <button class="media game-launch" type="button" data-game="dodge" aria-label="Jouer à Dodge Game">
+                        <img src="assets/games/previews/dodge.webp" alt="Capture du Dodge Game : vaisseau spatial en 3D tirant sur des astéroïdes, la Terre en arrière-plan" data-alt-fr="Capture du Dodge Game : vaisseau spatial en 3D tirant sur des astéroïdes, la Terre en arrière-plan" data-alt-en="Dodge Game screenshot: 3D spaceship shooting asteroids with Earth in the background" width="800" height="600">
+                        <img class="media-inset" src="assets/games/previews/dodge-boss.webp" alt="Dodge Game : combat contre un boss" data-alt-fr="Dodge Game : combat contre un boss" data-alt-en="Dodge Game: boss fight" width="800" height="600" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">▶</span>
+                            <span data-fr="Jouer maintenant" data-en="Play now">Jouer maintenant</span>
+                        </span>
+                    </button>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Jeu · 3D" data-en="Game · 3D">Jeu · 3D</span>
+                            <span class="status" data-fr="Terminé" data-en="Completed">Terminé</span>
+                        </div>
+
+                        <h3>Dodge Game</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Un shoot'em up spatial en 3D : vaisseaux en métal, astéroïdes en relief, la Terre et une station spatiale en arrière-plan."
+                            data-en="A 3D space shoot'em up: metal ships, sculpted asteroids, with Earth and a space station in the background."
+                        >
+                            Un shoot'em up spatial en 3D : vaisseaux en métal, astéroïdes en relief,
+                            la Terre et une station spatiale en arrière-plan.
+                        </p>
+
+                        <div class="evolution">
+                            <span><b>v1</b> Python · Pygame</span>
+                            <span aria-hidden="true">→</span>
+                            <span class="now"><b>v2</b> JavaScript · Three.js</span>
+                        </div>
+
+                        <ul class="features">
+                            <li data-fr="4 types d'ennemis, astéroïdes qui se divisent et un boss tous les 5 niveaux" data-en="4 enemy types, asteroids that split apart and a boss every 5 levels">4 types d'ennemis, astéroïdes qui se divisent et un boss tous les 5 niveaux</li>
+                            <li data-fr="Bonus, combos, bombes et meilleur score sauvegardé" data-en="Power-ups, combos, bombs and a saved high score">Bonus, combos, bombes et meilleur score sauvegardé</li>
+                            <li data-fr="Explosions réalistes : feu, fumée, débris et lumière" data-en="Realistic explosions: fire, smoke, debris and light">Explosions réalistes : feu, fumée, débris et lumière</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>Three.js</span>
+                            <span>WebGL</span>
+                            <span>JavaScript</span>
+                            <span>Python</span>
+                        </div>
+
+                        <div class="project-actions">
+                            <button class="btn btn-primary game-launch" type="button" data-game="dodge">
+                                <span data-fr="Jouer" data-en="Play">Jouer</span>
+                                <span aria-hidden="true">▶</span>
+                            </button>
+                        </div>
+
+                        <p class="credit" data-fr="Sons : Kenney (CC0) · Textures de la Terre : NASA" data-en="Sounds: Kenney (CC0) · Earth textures: NASA">Sons : Kenney (CC0) · Textures de la Terre : NASA</p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Hangman -->
+
+                <article class="project">
+
+                    <button class="media game-launch" type="button" data-game="hangman" aria-label="Jouer à Hangman">
+                        <img src="assets/games/previews/hangman.webp" alt="Capture du jeu Hangman : photo pixelisée à deviner lettre par lettre" data-alt-fr="Capture du jeu Hangman : photo pixelisée à deviner lettre par lettre" data-alt-en="Hangman game screenshot: pixelated photo revealed letter by letter" width="800" height="600" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">▶</span>
+                            <span data-fr="Jouer maintenant" data-en="Play now">Jouer maintenant</span>
+                        </span>
+                    </button>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Jeu · Mots" data-en="Game · Words">Jeu · Mots</span>
+                            <span class="status" data-fr="Terminé" data-en="Completed">Terminé</span>
+                        </div>
+
+                        <h3>Hangman</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Le jeu du pendu revisité : une vraie photo, d'abord pixelisée, se dévoile à chaque bonne lettre."
+                            data-en="Hangman, revisited: a real photo, pixelated at first, reveals itself with every correct letter."
+                        >
+                            Le jeu du pendu revisité : une vraie photo, d'abord pixelisée,
+                            se dévoile à chaque bonne lettre.
+                        </p>
+
+                        <div class="evolution">
+                            <span><b>v1</b> Python · Pygame</span>
+                            <span aria-hidden="true">→</span>
+                            <span class="now"><b>v2</b> JavaScript · Canvas</span>
+                        </div>
+
+                        <ul class="features">
+                            <li data-fr="30 mots en 5 catégories, en français ou en anglais" data-en="30 words in 5 categories, in French or English">30 mots en 5 catégories, en français ou en anglais</li>
+                            <li data-fr="Indice, score et série de victoires" data-en="Hint, score and win streak">Indice, score et série de victoires</li>
+                            <li data-fr="Jouable au clavier ou au doigt sur mobile" data-en="Playable with a keyboard or by touch on mobile">Jouable au clavier ou au doigt sur mobile</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>JavaScript</span>
+                            <span>Canvas</span>
+                            <span>Python</span>
+                            <span>Pygame</span>
+                        </div>
+
+                        <div class="project-actions">
+                            <button class="btn btn-primary game-launch" type="button" data-game="hangman">
+                                <span data-fr="Jouer" data-en="Play">Jouer</span>
+                                <span aria-hidden="true">▶</span>
+                            </button>
+                        </div>
+
+                        <p class="credit" data-fr="Photos : Unsplash" data-en="Photos: Unsplash">Photos : Unsplash</p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Digital CV -->
+
+                <article class="project reverse">
+
+                    <a aria-label='Ouvrir le CV numérique' class='media cv-link' href='/cv'>
+                        <img src="assets/games/previews/cv.jpg" alt="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-fr="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-en="Preview of Sabina Karimova's digital resume with a 3D globe" width="800" height="504" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">↗</span>
+                            <span data-fr="Visiter le site" data-en="Visit the site">Visiter le site</span>
+                        </span>
+                    </a>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Site web" data-en="Website">Site web</span>
+                            <span class="status" data-fr="En ligne" data-en="Live">En ligne</span>
+                        </div>
+
+                        <h3 data-fr="CV numérique" data-en="Digital resume">CV numérique</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Mon CV sous forme de site, codé sans framework, avec un globe terrestre en 3D et les deux jeux intégrés."
+                            data-en="My resume as a website, coded without a framework, with a 3D globe and both games built in."
+                        >
+                            Mon CV sous forme de site, codé sans framework,
+                            avec un globe terrestre en 3D et les deux jeux intégrés.
+                        </p>
+
+                        <ul class="features">
+                            <li data-fr="Bilingue français / anglais" data-en="Bilingual French / English">Bilingue français / anglais</li>
+                            <li data-fr="Responsive : ordinateur, tablette et mobile" data-en="Responsive: desktop, tablet and mobile">Responsive : ordinateur, tablette et mobile</li>
+                            <li data-fr="Animations et globe Three.js" data-en="Animations and a Three.js globe">Animations et globe Three.js</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                        </div>
+
+                        <div class="project-actions">
+                            <a class='btn btn-primary cv-link' href='/cv'>
+                                <span data-fr="Voir le CV" data-en="See the resume">Voir le CV</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </div>
+        </section>
+
+
+        <!-- SKILLS -->
+
+        <section class="section" id="competences">
+            <div class="wrap">
+
+                <div class="section-head">
+                    <span class="eyebrow" data-fr="Compétences" data-en="Skills">Compétences</span>
+                    <h2 class="section-title" data-fr="Ma boîte à outils" data-en="My toolkit">Ma boîte à outils</h2>
+                </div>
+
+                <div class="skills">
+
+                    <div class="glass-card">
+                        <span class="card-icon" aria-hidden="true">&lt;/&gt;</span>
+                        <h3 data-fr="Langages" data-en="Languages">Langages</h3>
+
+                        <ul class="skill-list">
+                            <li><strong>Python</strong><small data-fr="Premières versions des deux jeux" data-en="First versions of both games">Premières versions des deux jeux</small></li>
+                            <li><strong>PHP</strong><small data-fr="JobBoard (projet en cours)" data-en="JobBoard (in progress)">JobBoard (projet en cours)</small></li>
+                            <li><strong>JavaScript</strong><small data-fr="Jeux web, CV et portfolio" data-en="Web games, resume and portfolio">Jeux web, CV et portfolio</small></li>
+                            <li><strong>HTML · CSS</strong><small data-fr="Mises en page responsive, Grid, Flexbox" data-en="Responsive layouts, Grid, Flexbox">Mises en page responsive, Grid, Flexbox</small></li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <span class="card-icon" aria-hidden="true">3D</span>
+                        <h3 data-fr="Bibliothèques & outils" data-en="Libraries & tools">Bibliothèques &amp; outils</h3>
+
+                        <ul class="skill-list">
+                            <li><strong>Three.js · WebGL</strong><small data-fr="Globe du CV, Dodge Game en 3D" data-en="Resume globe, Dodge Game in 3D">Globe du CV, Dodge Game en 3D</small></li>
+                            <li><strong>Pygame · Canvas</strong><small data-fr="Boucles de jeu et interfaces graphiques" data-en="Game loops and graphical interfaces">Boucles de jeu et interfaces graphiques</small></li>
+                            <li><strong>SQL · MariaDB</strong><small data-fr="Bases de données, JobBoard en cours" data-en="Databases, ongoing job board">Bases de données, JobBoard en cours</small></li>
+                            <li><strong>Git · GitHub</strong><small data-fr="Versionnement et travail en équipe" data-en="Version control and teamwork">Versionnement et travail en équipe</small></li>
+                            <li><strong>Bash · Linux · PowerShell</strong><small data-fr="Ligne de commande" data-en="Command line">Ligne de commande</small></li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card">
+                        <span class="card-icon" aria-hidden="true">AI</span>
+                        <h3 data-fr="IA & outils" data-en="AI & tools">IA &amp; outils</h3>
+
+                        <ul class="skill-list">
+                            <li><strong data-fr="IA générative & automatisation" data-en="Generative AI & automation">IA générative &amp; automatisation</strong><small data-fr="Outils d'intelligence artificielle au quotidien" data-en="Everyday artificial intelligence tools">Outils d'intelligence artificielle au quotidien</small></li>
+                            <li><strong>Word · Excel · Windows</strong><small data-fr="Bureautique" data-en="Office software">Bureautique</small></li>
+                            <li><strong>Photoshop · Premiere Pro</strong><small data-fr="Image et vidéo" data-en="Image and video">Image et vidéo</small></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <div class="strengths">
+
+                    <div class="strength">
+                        <small data-fr="Douane" data-en="Customs">Douane</small>
+                        <h3 data-fr="Rigueur & sens du détail" data-en="Rigour & attention to detail">Rigueur &amp; sens du détail</h3>
+                        <p data-fr="Une déclaration ne tolère pas d'erreur : je relis, je vérifie, je teste." data-en="A customs declaration tolerates no errors: I review, check and test.">Une déclaration ne tolère pas d'erreur : je relis, je vérifie, je teste.</p>
+                    </div>
+
+                    <div class="strength">
+                        <small>EPITECH</small>
+                        <h3 data-fr="Autonomie" data-en="Self-reliance">Autonomie</h3>
+                        <p data-fr="Apprendre en construisant : chaque projet m'a appris un nouvel outil." data-en="Learning by building: every project taught me a new tool.">Apprendre en construisant : chaque projet m'a appris un nouvel outil.</p>
+                    </div>
+
+                    <div class="strength">
+                        <small data-fr="Reconversion" data-en="Career change">Reconversion</small>
+                        <h3 data-fr="Curiosité" data-en="Curiosity">Curiosité</h3>
+                        <p data-fr="De la douane au code : j'aime comprendre comment les choses fonctionnent." data-en="From customs to code: I like understanding how things work.">De la douane au code : j'aime comprendre comment les choses fonctionnent.</p>
+                    </div>
+
+                    <div class="strength">
+                        <small data-fr="5 langues" data-en="5 languages">5 langues</small>
+                        <h3 data-fr="Communication multilingue" data-en="Multilingual communication">Communication multilingue</h3>
+                        <p data-fr="Azerbaïdjanais, turc, français, anglais et russe, à l'oral comme à l'écrit." data-en="Azerbaijani, Turkish, French, English and Russian, spoken and written.">Azerbaïdjanais, turc, français, anglais et russe, à l'oral comme à l'écrit.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CV -->
+
+        <section class="section" id="cv">
+            <div class="wrap">
+
+                <div class="section-head cv-head">
+                    <div>
+                        <span class="eyebrow" data-fr="Curriculum vitae" data-en="Curriculum vitae">Curriculum vitae</span>
+                        <h2 class="section-title" data-fr="Mon CV" data-en="My resume">Mon CV</h2>
+
+                        <p
+                            class="section-lead"
+                            data-fr="Étudiante en Pré-MSc Pro à EPITECH Nantes, je me reconvertis vers le développement informatique après plusieurs années dans la douane, le transit international et l'enseignement du français. Rigoureuse, autonome et habituée aux environnements exigeants et réglementés, je recherche un contrat d'apprentissage à partir de janvier 2027 pour contribuer à des projets IT et poursuivre ma montée en compétences."
+                            data-en="Pre-MSc Pro student at EPITECH Nantes, I am moving into software development after several years in customs, international freight and French teaching. Rigorous, self-reliant and used to demanding, regulated environments, I am looking for an apprenticeship contract starting January 2027 to contribute to IT projects and keep growing my skills."
+                        >
+                            Étudiante en Pré-MSc Pro à EPITECH Nantes, je me reconvertis vers le développement informatique
+                            après plusieurs années dans la douane, le transit international et l'enseignement du français.
+                            Rigoureuse, autonome et habituée aux environnements exigeants et réglementés, je recherche
+                            un contrat d'apprentissage à partir de janvier 2027 pour contribuer à des projets IT
+                            et poursuivre ma montée en compétences.
+                        </p>
+                    </div>
+
+                    <div class="hero-actions">
+                        <a class='btn btn-primary cv-link' href='/cv'>
+                            <span data-fr="Ouvrir le CV numérique" data-en="Open the digital resume">Ouvrir le CV numérique</span>
+                            <span aria-hidden="true">↗</span>
+                        </a>
+                        <a class="btn" href="assets/cv/Sabina-Karimova-CV.pdf" download data-fr="Télécharger le CV (PDF) ↓" data-en="Download resume (PDF) ↓">Télécharger le CV (PDF) ↓</a>
+                    </div>
+                </div>
+
+
+                <div class="cv-grid">
+
+                    <div class="cv-main">
+
+                        <h3 class="cv-subtitle" data-fr="Expérience professionnelle" data-en="Professional experience">Expérience professionnelle</h3>
+
+                        <ol class="timeline">
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>08/2019 — 10/2021</time>
+                                        <span class="step-tag" data-fr="Douane" data-en="Customs">Douane</span>
+                                    </div>
+                                    <strong data-fr="Déclarante en douane" data-en="Customs declarant">Déclarante en douane</strong>
+                                    <span data-fr="Comité d'État des douanes d'Azerbaïdjan · Bakou" data-en="State Customs Committee of Azerbaijan · Baku">Comité d'État des douanes d'Azerbaïdjan · Bakou</span>
+
+                                    <ul class="tasks">
+                                        <li data-fr="Préparation et dépôt des déclarations en douane import/export." data-en="Preparation and submission of import/export customs declarations.">Préparation et dépôt des déclarations en douane import/export.</li>
+                                        <li data-fr="Vérification des documents, calcul des droits et taxes, suivi des dossiers." data-en="Document checks, calculation of duties and taxes, case follow-up.">Vérification des documents, calcul des droits et taxes, suivi des dossiers.</li>
+                                        <li data-fr="Communication avec les autorités douanières et respect de la réglementation." data-en="Communication with customs authorities and regulatory compliance.">Communication avec les autorités douanières et respect de la réglementation.</li>
+                                    </ul>
+                                </article>
+                            </li>
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>05/2016 — 08/2019</time>
+                                        <span class="step-tag" data-fr="Logistique" data-en="Logistics">Logistique</span>
+                                    </div>
+                                    <strong data-fr="Agent de transit" data-en="Freight forwarding agent">Agent de transit</strong>
+                                    <span data-fr="Murphy Shipping &amp; Commercial Services Azerbaijan · Bakou" data-en="Murphy Shipping &amp; Commercial Services Azerbaijan · Baku">Murphy Shipping &amp; Commercial Services Azerbaijan · Bakou</span>
+
+                                    <ul class="tasks">
+                                        <li data-fr="Organisation et suivi des transports internationaux maritime, aérien et terrestre." data-en="Organising and tracking international sea, air and road transport.">Organisation et suivi des transports internationaux maritime, aérien et terrestre.</li>
+                                        <li data-fr="Préparation et contrôle des documents de transport (BL, CMR, factures, listes de colisage)." data-en="Preparing and checking transport documents (BL, CMR, invoices, packing lists).">Préparation et contrôle des documents de transport (BL, CMR, factures, listes de colisage).</li>
+                                        <li data-fr="Coordination avec transitaires, transporteurs, clients et autorités douanières." data-en="Coordination with forwarders, carriers, clients and customs authorities.">Coordination avec transitaires, transporteurs, clients et autorités douanières.</li>
+                                    </ul>
+                                </article>
+                            </li>
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>05/2013 — 05/2016</time>
+                                        <span class="step-tag" data-fr="Enseignement" data-en="Teaching">Enseignement</span>
+                                    </div>
+                                    <strong data-fr="Professeure de français" data-en="French teacher">Professeure de français</strong>
+                                    <span data-fr="Hedef Courses · Bakou" data-en="Hedef Courses · Baku">Hedef Courses · Bakou</span>
+
+                                    <ul class="tasks">
+                                        <li data-fr="Enseignement du français et préparation au baccalauréat." data-en="Teaching French and preparing students for the baccalaureate.">Enseignement du français et préparation au baccalauréat.</li>
+                                        <li data-fr="Création de supports pédagogiques, cours en présentiel et à distance." data-en="Creating teaching materials, in-person and remote classes.">Création de supports pédagogiques, cours en présentiel et à distance.</li>
+                                    </ul>
+                                </article>
+                            </li>
+
+                        </ol>
+
+
+                        <h3 class="cv-subtitle" data-fr="Formation" data-en="Education">Formation</h3>
+
+                        <ol class="timeline">
+
+                            <li class="now">
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time data-fr="Depuis 09/2026" data-en="Since 09/2026">Depuis 09/2026</time>
+                                    </div>
+                                    <strong>EPITECH Nantes</strong>
+                                    <span>Pré-MSc Pro</span>
+                                </article>
+                            </li>
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>2016</time>
+                                    </div>
+                                    <strong data-fr="Attestation de réussite · Déclarant en douane" data-en="Certificate of achievement · Customs declarant">Attestation de réussite · Déclarant en douane</strong>
+                                    <span data-fr="Comité d'État des douanes d'Azerbaïdjan · Bakou" data-en="State Customs Committee of Azerbaijan · Baku">Comité d'État des douanes d'Azerbaïdjan · Bakou</span>
+                                </article>
+                            </li>
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>2013 — 2015</time>
+                                    </div>
+                                    <strong data-fr="Didactique des langues étrangères" data-en="Foreign language teaching methods">Didactique des langues étrangères</strong>
+                                    <span data-fr="Université des Langues d'Azerbaïdjan · Bakou · Méthodologie de l'enseignement du français" data-en="Azerbaijan University of Languages · Baku · French teaching methodology">Université des Langues d'Azerbaïdjan · Bakou · Méthodologie de l'enseignement du français</span>
+                                </article>
+                            </li>
+
+                            <li>
+                                <article class="step">
+                                    <div class="step-top">
+                                        <time>2009 — 2013</time>
+                                    </div>
+                                    <strong data-fr="Licence professionnelle · Professeur de français" data-en="Professional Bachelor's · French teacher">Licence professionnelle · Professeur de français</strong>
+                                    <span data-fr="Université des Langues d'Azerbaïdjan · Bakou" data-en="Azerbaijan University of Languages · Baku">Université des Langues d'Azerbaïdjan · Bakou</span>
+                                </article>
+                            </li>
+
+                        </ol>
+
+                    </div>
+
+
+                    <aside class="cv-side">
+
+                        <div class="glass-card">
+                            <span class="card-icon" aria-hidden="true">i</span>
+                            <h3 data-fr="En bref" data-en="At a glance">En bref</h3>
+
+                            <dl class="facts">
+                                <div>
+                                    <dt data-fr="Objectif" data-en="Goal">Objectif</dt>
+                                    <dd data-fr="Alternance IT · contrat d'apprentissage" data-en="IT apprenticeship contract">Alternance IT · contrat d'apprentissage</dd>
+                                </div>
+                                <div>
+                                    <dt data-fr="Disponibilité" data-en="Availability">Disponibilité</dt>
+                                    <dd data-fr="Dès janvier 2027" data-en="From January 2027">Dès janvier 2027</dd>
+                                </div>
+                                <div>
+                                    <dt data-fr="Cadre" data-en="Eligibility">Cadre</dt>
+                                    <dd data-fr="Dérogation création/reprise d'entreprise" data-en="Business creation/takeover exemption">Dérogation création/reprise d'entreprise</dd>
+                                </div>
+                                <div>
+                                    <dt data-fr="Localisation" data-en="Location">Localisation</dt>
+                                    <dd>Rezé (44) · Nantes</dd>
+                                </div>
+                                <div>
+                                    <dt data-fr="Mobilité" data-en="Mobility">Mobilité</dt>
+                                    <dd data-fr="Permis B" data-en="Driving licence (B)">Permis B</dd>
+                                </div>
+                            </dl>
+                        </div>
+
+                        <div class="glass-card">
+                            <span class="card-icon" aria-hidden="true">Aa</span>
+                            <h3 data-fr="Langues" data-en="Languages">Langues</h3>
+
+                            <div class="lang-list">
+
+                                <div class="lang-row">
+                                    <b data-fr="Azerbaïdjanais" data-en="Azerbaijani">Azerbaïdjanais</b><em>C2</em>
+                                    <span class="meter"><i style="width: 100%"></i></span>
+                                </div>
+
+                                <div class="lang-row">
+                                    <b data-fr="Turc" data-en="Turkish">Turc</b><em>C1</em>
+                                    <span class="meter"><i style="width: 85%"></i></span>
+                                </div>
+
+                                <div class="lang-row">
+                                    <b data-fr="Français" data-en="French">Français</b><em>B2</em>
+                                    <span class="meter"><i style="width: 67%"></i></span>
+                                </div>
+
+                                <div class="lang-row">
+                                    <b data-fr="Anglais" data-en="English">Anglais</b><em>A2 / B1</em>
+                                    <span class="meter"><i style="width: 42%"></i></span>
+                                </div>
+
+                                <div class="lang-row">
+                                    <b data-fr="Russe" data-en="Russian">Russe</b><em>A2</em>
+                                    <span class="meter"><i style="width: 33%"></i></span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="glass-card">
+                            <span class="card-icon" aria-hidden="true">♥</span>
+                            <h3 data-fr="Centres d'intérêt" data-en="Interests">Centres d'intérêt</h3>
+
+                            <ul class="skill-list">
+                                <li><strong data-fr="Échecs" data-en="Chess">Échecs</strong><small data-fr="Anticiper, planifier, analyser : la même logique qu'en programmation" data-en="Anticipating, planning, analysing: the same logic as programming">Anticiper, planifier, analyser : la même logique qu'en programmation</small></li>
+                                <li><strong data-fr="Lecture" data-en="Reading">Lecture</strong><small data-fr="Romans et ouvrages variés, une curiosité au-delà du code" data-en="Novels and varied books, curiosity beyond code">Romans et ouvrages variés, une curiosité au-delà du code</small></li>
+                                <li><strong data-fr="Cinéma" data-en="Cinema">Cinéma</strong><small data-fr="Histoires, mise en scène et effets visuels" data-en="Storytelling, direction and visual effects">Histoires, mise en scène et effets visuels</small></li>
+                                <li><strong data-fr="Danse" data-en="Dance">Danse</strong><small data-fr="Rythme, discipline et énergie" data-en="Rhythm, discipline and energy">Rythme, discipline et énergie</small></li>
+                                <li><strong data-fr="Chant" data-en="Singing">Chant</strong><small data-fr="Une passion qui aide aussi à prendre la parole en public" data-en="A passion that also helps with public speaking">Une passion qui aide aussi à prendre la parole en public</small></li>
+                            </ul>
+                        </div>
+
+                        <a class='cv-preview cv-link' href='/cv'>
+                            <img src="assets/games/previews/cv.jpg" alt="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-fr="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-en="Preview of Sabina Karimova's digital resume with a 3D globe" width="800" height="504" loading="lazy">
+                            <span>
+                                <b data-fr="CV numérique interactif" data-en="Interactive digital resume">CV numérique interactif</b>
+                                <small data-fr="Globe 3D, bilingue, jeux intégrés ↗" data-en="3D globe, bilingual, built-in games ↗">Globe 3D, bilingue, jeux intégrés ↗</small>
+                            </span>
+                        </a>
+
+                    </aside>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <section class="section" id="contact">
+            <div class="wrap">
+
+                <div class="contact-card">
+                    <div class="contact-grid">
+
+                        <div>
+                            <span class="eyebrow">Contact</span>
+
+                            <h2 style="margin-top: 14px" data-fr="Construisons quelque chose ensemble." data-en="Let's build something together.">Construisons quelque chose ensemble.</h2>
+
+                            <p
+                                data-fr="Je recherche une alternance IT en contrat d'apprentissage à partir de janvier 2027, à Nantes et ses environs."
+                                data-en="I'm looking for an IT apprenticeship contract starting January 2027, in or around Nantes."
+                            >
+                                Je recherche une alternance IT en contrat d'apprentissage
+                                à partir de janvier 2027, à Nantes et ses environs.
+                            </p>
+
+                            <div class="socials" style="margin-top: 24px">
+                                <a class="btn btn-small" href="https://www.linkedin.com/in/sabina-karimova-633447382" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+                                <a class="btn btn-small" href="https://github.com/Sabina-Kari-ai" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+                                <a class='btn btn-small cv-link' data-en='Digital resume ↗' data-fr='CV numérique ↗' href='/cv'>CV numérique ↗</a>
+                                <a class="btn btn-small" href="assets/cv/Sabina-Karimova-CV.pdf" download data-fr="CV PDF ↓" data-en="Resume PDF ↓">CV PDF ↓</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-list">
+
+                            <div class="contact-item">
+                                <div>
+                                    <small>Email</small>
+                                    <strong id="contact-email"><a href="mailto:sabina.karimova@epitech.eu">sabina.karimova@epitech.eu</a></strong>
+                                </div>
+                                <button class="copy" type="button" data-copy="contact-email" data-fr="Copier" data-en="Copy">Copier</button>
+                            </div>
+
+                            <div class="contact-item">
+                                <div>
+                                    <small data-fr="Téléphone" data-en="Phone">Téléphone</small>
+                                    <strong id="contact-phone">07 67 39 35 39</strong>
+                                </div>
+                                <button class="copy" type="button" data-copy="contact-phone" data-fr="Copier" data-en="Copy">Copier</button>
+                            </div>
+
+                            <div class="contact-item">
+                                <div>
+                                    <small data-fr="Localisation" data-en="Location">Localisation</small>
+                                    <strong data-fr="Rezé (44) · Nantes · Permis B" data-en="Rezé (44) · Nantes · Driving licence">Rezé (44) · Nantes · Permis B</strong>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer>
+        <div class="wrap">
+            <span>© 2026 Sabina Karimova</span>
+            <span data-fr="Sons : Kenney (CC0) · Terre : NASA · Photos : Unsplash" data-en="Sounds: Kenney (CC0) · Earth: NASA · Photos: Unsplash">Sons : Kenney (CC0) · Terre : NASA · Photos : Unsplash</span>
+        </div>
+    </footer>
+
+
+    <!-- GAME MODAL (shared with games.js / dodge.js) -->
+
+    <div class="game-modal" id="game-modal" aria-hidden="true">
+
+        <div class="game-modal-backdrop" data-game-close></div>
+
+        <section class="game-dialog" role="dialog" aria-modal="true" aria-labelledby="game-title">
+
+            <div class="game-dialog-header">
+                <div>
+                    <p class="game-kicker" data-fr="Projet interactif" data-en="Interactive project">Projet interactif</p>
+                    <h2 id="game-title">Hangman</h2>
+                </div>
+
+                <button class="game-close" id="game-close" type="button" aria-label="Fermer">×</button>
+            </div>
+
+            <div class="game-stage-wrap">
+                <canvas id="game-canvas" width="800" height="600" aria-label="Zone de jeu"></canvas>
+            </div>
+
+            <div class="game-controls">
+                <p class="game-help" id="game-help"></p>
+
+                <div class="game-mobile-controls">
+                    <button class="game-control-button" id="game-left" type="button" aria-label="Gauche">←</button>
+                    <button class="game-control-button" id="game-fire" type="button" data-fr="TIR" data-en="FIRE">TIR</button>
+                    <button class="game-control-button" id="game-right" type="button" aria-label="Droite">→</button>
+                    <button class="game-control-button" id="game-bomb" type="button" data-fr="BOMBE" data-en="BOMB">BOMBE</button>
+                    <button class="game-control-button" id="game-restart" type="button" data-fr="Rejouer" data-en="Restart">Rejouer</button>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- Page core: language, stars, hero Earth, counters, copy buttons
+         and the game modal. Declares the globals games.js / dodge.js use. -->
+    <script>
+        const canvas = document.querySelector("#game-canvas");
+        const ctx = canvas.getContext("2d");
+
+        const gameModal = document.querySelector("#game-modal");
+        const gameTitle = document.querySelector("#game-title");
+        const gameHelp = document.querySelector("#game-help");
+
+        const leftButton = document.querySelector("#game-left");
+        const rightButton = document.querySelector("#game-right");
+        const fireButton = document.querySelector("#game-fire");
+        const bombButton = document.querySelector("#game-bomb");
+        const restartButton = document.querySelector("#game-restart");
+
+        let currentLanguage = "fr";
+        let activeGame = null;
+        let currentGameCleanup = null;
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+
+        function safeGet(key, fallback = null) {
+            try {
+                const value = localStorage.getItem(key);
+                return value === null ? fallback : value;
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+
+        function safeSet(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch (error) {
+                /* Storage unavailable: the page works without it. */
+            }
+        }
+
+
+        function refreshGameHelp() {
+            if (activeGame === "hangman") {
+                gameHelp.textContent = currentLanguage === "fr"
+                    ? "Clavier ou boutons : choisissez une lettre • Indice : coûte 1 vie • Entrée : mot suivant"
+                    : "Keyboard or buttons: pick a letter • Hint: costs 1 life • Enter: next word";
+            }
+
+            if (activeGame === "dodge") {
+                gameHelp.textContent = currentLanguage === "fr"
+                    ? "Flèches / ZQSD : bouger • Espace : tirer • X : bombe • P : pause • M : son • Mobile : glissez sur l'écran"
+                    : "Arrows / WASD: move • Space: fire • X: bomb • P: pause • M: sound • Mobile: drag on the screen";
+            }
+        }
+
+
+        /* ---------- language ---------- */
+
+        function changeLanguage(language) {
+            currentLanguage = language;
+            document.documentElement.lang = language;
+
+            document.querySelectorAll("[data-fr][data-en]").forEach((element) => {
+                element.textContent = language === "fr" ? element.dataset.fr : element.dataset.en;
+            });
+
+            document.querySelectorAll("[data-alt-fr][data-alt-en]").forEach((element) => {
+                element.alt = language === "fr" ? element.dataset.altFr : element.dataset.altEn;
+            });
+
+            document.querySelectorAll("[data-count][data-suffix]").forEach((element) => {
+                element.dataset.suffix = language === "fr" ? " ans" : " yrs";
+                element.textContent = element.dataset.count + element.dataset.suffix;
+            });
+
+            document.querySelector("#lang-fr").setAttribute("aria-pressed", String(language === "fr"));
+            document.querySelector("#lang-en").setAttribute("aria-pressed", String(language === "en"));
+
+            safeSet("cv-language", language);
+            refreshGameHelp();
+        }
+
+        document.querySelector("#lang-fr").addEventListener("click", () => changeLanguage("fr"));
+        document.querySelector("#lang-en").addEventListener("click", () => changeLanguage("en"));
+
+        if (safeGet("cv-language") === "en") {
+            changeLanguage("en");
+        }
+
+
+        /* ---------- starfield ---------- */
+
+        (function starfield() {
+            const starCanvas = document.querySelector("#stars");
+            const starCtx = starCanvas.getContext("2d");
+            let stars = [];
+            let width = 0;
+            let height = 0;
+
+            function resize() {
+                const ratio = Math.min(window.devicePixelRatio || 1, 2);
+                width = window.innerWidth;
+                height = window.innerHeight;
+                starCanvas.width = width * ratio;
+                starCanvas.height = height * ratio;
+                starCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+                stars = Array.from({ length: Math.round((width * height) / 7000) }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    r: Math.random() * 1.2 + 0.2,
+                    a: Math.random() * 0.7 + 0.2,
+                    s: Math.random() * 2 + 0.5
+                }));
+            }
+
+            function draw(time) {
+                starCtx.clearRect(0, 0, width, height);
+
+                stars.forEach((star) => {
+                    const twinkle = reduceMotion ? 1 : 0.65 + Math.sin(time / 1000 * star.s + star.x) * 0.35;
+                    starCtx.globalAlpha = star.a * twinkle;
+                    starCtx.fillStyle = "#e6efff";
+                    starCtx.beginPath();
+                    starCtx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+                    starCtx.fill();
+                });
+
+                if (!reduceMotion) {
+                    requestAnimationFrame(draw);
+                }
+            }
+
+            resize();
+            window.addEventListener("resize", resize);
+            requestAnimationFrame(draw);
+        })();
+
+
+        /* ---------- spiral galaxy background (Three.js) ---------- */
+
+        (async function galaxyBackground() {
+            const galaxyCanvas = document.querySelector("#galaxy");
+
+            let THREE;
+
+            try {
+                THREE = await import("https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js");
+            } catch (error) {
+                return;
+            }
+
+            let renderer;
+
+            try {
+                renderer = new THREE.WebGLRenderer({ canvas: galaxyCanvas, alpha: true, powerPreference: "low-power" });
+            } catch (error) {
+                return;
+            }
+
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+            renderer.setPixelRatio(pixelRatio);
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 100);
+            camera.position.set(0, 3.4, 8.5);
+
+            /* Particles laid out along four logarithmic-ish arms. */
+            const count = window.innerWidth < 700 ? 24000 : 60000;
+            const radius = 7.5;
+            const branches = 4;
+            const twist = 1.15;
+
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+            const scales = new Float32Array(count);
+
+            const core = new THREE.Color("#ffdcb4");
+            const arm = new THREE.Color("#3f63ff");
+            const pink = new THREE.Color("#ff6fb8");
+            const violet = new THREE.Color("#a35cff");
+            const color = new THREE.Color();
+
+            const scatter = (r) => Math.pow(Math.random(), 2.6) * (Math.random() < 0.5 ? 1 : -1) * (0.12 + r * 0.09);
+
+            for (let i = 0; i < count; i++) {
+                const r = Math.pow(Math.random(), 1.3) * radius;
+                const angle = ((i % branches) / branches) * Math.PI * 2 + r * twist;
+
+                positions[i * 3] = Math.cos(angle) * r + scatter(r);
+                positions[i * 3 + 1] = scatter(r) * 0.35;
+                positions[i * 3 + 2] = Math.sin(angle) * r + scatter(r);
+
+                color.copy(core).lerp(arm, Math.min(1, r / (radius * 0.45)));
+
+                const roll = Math.random();
+
+                if (roll < 0.22) {
+                    color.lerp(violet, 0.7);
+                } else if (roll < 0.3 && r > 2) {
+                    color.lerp(pink, 0.65);
+                }
+
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+
+                scales[i] = Math.random();
+            }
+
+            const geometry = new THREE.BufferGeometry();
+            geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+            geometry.setAttribute("aScale", new THREE.BufferAttribute(scales, 1));
+
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uSize: { value: 64 * pixelRatio }
+                },
+                vertexShader: `
+                    attribute float aScale;
+                    uniform float uSize;
+                    varying vec3 vColor;
+                    void main() {
+                        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+                        gl_Position = projectionMatrix * mv;
+                        gl_PointSize = uSize * (0.3 + aScale) / -mv.z;
+                        vColor = color;
+                    }
+                `,
+                fragmentShader: `
+                    varying vec3 vColor;
+                    void main() {
+                        float d = length(gl_PointCoord - 0.5);
+                        float strength = pow(1.0 - smoothstep(0.0, 0.5, d), 2.4);
+                        gl_FragColor = vec4(vColor * strength, strength);
+                    }
+                `,
+                vertexColors: true,
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            });
+
+            const galaxy = new THREE.Group();
+            galaxy.add(new THREE.Points(geometry, material));
+
+            /* Soft glow at the core */
+            const glowCanvas = document.createElement("canvas");
+            glowCanvas.width = glowCanvas.height = 128;
+            const glowCtx = glowCanvas.getContext("2d");
+            const gradient = glowCtx.createRadialGradient(64, 64, 0, 64, 64, 64);
+            gradient.addColorStop(0, "rgba(255, 226, 190, 0.55)");
+            gradient.addColorStop(0.25, "rgba(255, 190, 140, 0.18)");
+            gradient.addColorStop(1, "rgba(255, 160, 120, 0)");
+            glowCtx.fillStyle = gradient;
+            glowCtx.fillRect(0, 0, 128, 128);
+
+            const coreGlow = new THREE.Sprite(new THREE.SpriteMaterial({
+                map: new THREE.CanvasTexture(glowCanvas),
+                transparent: true,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending
+            }));
+            coreGlow.scale.setScalar(3);
+            galaxy.add(coreGlow);
+
+            galaxy.rotation.x = 0.62;
+            galaxy.rotation.z = -0.28;
+            scene.add(galaxy);
+
+            function layout() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const wide = width > 900;
+
+                renderer.setSize(width, height, false);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+
+                galaxy.position.set(wide ? 1.6 : 0.2, wide ? 0.2 : 1.2, 0);
+                galaxy.scale.setScalar(wide ? 1.9 : 1.4);
+            }
+
+            layout();
+            window.addEventListener("resize", layout);
+
+            let scrollProgress = 0;
+
+            function readScroll() {
+                const max = document.documentElement.scrollHeight - window.innerHeight;
+                scrollProgress = max > 0 ? window.scrollY / max : 0;
+            }
+
+            readScroll();
+            window.addEventListener("scroll", readScroll, { passive: true });
+
+            let spin = 0;
+            let smoothScroll = scrollProgress;
+            let lastTime = performance.now();
+
+            function frame(time) {
+                const dt = Math.min(0.05, (time - lastTime) / 1000);
+                lastTime = time;
+
+                spin += dt * 0.025;
+                smoothScroll += (scrollProgress - smoothScroll) * 0.06;
+
+                galaxy.rotation.y = spin + smoothScroll * 1.4;
+                camera.position.y = 3.4 - smoothScroll * 2.6;
+                camera.position.z = 8.5 - smoothScroll * 1.5;
+                camera.lookAt(0, 0, 0);
+
+                renderer.render(scene, camera);
+
+                if (!reduceMotion) {
+                    requestAnimationFrame(frame);
+                }
+            }
+
+            requestAnimationFrame(frame);
+        })();
+
+
+        /* ---------- hero Earth (Three.js) ---------- */
+
+        (async function heroEarth() {
+            const visual = document.querySelector("#hero-visual");
+            const earthCanvas = document.querySelector("#hero-earth");
+
+            let THREE;
+
+            try {
+                THREE = await import("https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js");
+            } catch (error) {
+                return;
+            }
+
+            let renderer;
+
+            try {
+                renderer = new THREE.WebGLRenderer({ canvas: earthCanvas, antialias: true, alpha: true });
+            } catch (error) {
+                return;
+            }
+
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+            renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 100);
+            camera.position.set(0, 0, 12.5);
+
+            const loader = new THREE.TextureLoader();
+            const remote = "https://unpkg.com/three-globe/example/img/";
+
+            function texture(name, apply) {
+                loader.load("assets/img/" + name, apply, undefined, () => loader.load(remote + name, apply));
+            }
+
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x1d3150,
+                roughness: 0.85,
+                emissive: 0xffc98a,
+                emissiveIntensity: 0
+            });
+
+            const earth = new THREE.Mesh(new THREE.SphereGeometry(2.2, 96, 64), material);
+            earth.rotation.z = 0.41;
+            scene.add(earth);
+
+            texture("earth-blue-marble.jpg", (map) => {
+                map.colorSpace = THREE.SRGBColorSpace;
+                map.anisotropy = 8;
+                material.map = map;
+                material.color.set(0xffffff);
+                material.needsUpdate = true;
+                visual.classList.add("is-live");
+            });
+
+            texture("earth-topology.png", (map) => {
+                material.bumpMap = map;
+                material.bumpScale = 3;
+                material.needsUpdate = true;
+            });
+
+            texture("earth-night.jpg", (map) => {
+                map.colorSpace = THREE.SRGBColorSpace;
+                material.emissiveMap = map;
+                material.emissiveIntensity = 0.9;
+                material.needsUpdate = true;
+            });
+
+            const atmosphere = new THREE.Mesh(
+                new THREE.SphereGeometry(2.32, 96, 64),
+                new THREE.ShaderMaterial({
+                    vertexShader: `
+                        varying vec3 vNormal;
+                        varying vec3 vView;
+                        void main() {
+                            vec4 mv = modelViewMatrix * vec4(position, 1.0);
+                            vNormal = normalize(normalMatrix * normal);
+                            vView = normalize(-mv.xyz);
+                            gl_Position = projectionMatrix * mv;
+                        }
+                    `,
+                    fragmentShader: `
+                        varying vec3 vNormal;
+                        varying vec3 vView;
+                        void main() {
+                            float f = pow(1.0 - abs(dot(vNormal, vView)), 2.4) * 1.9;
+                            gl_FragColor = vec4(vec3(0.38, 0.66, 1.0) * f, f);
+                        }
+                    `,
+                    transparent: true,
+                    blending: THREE.AdditiveBlending,
+                    depthWrite: false
+                })
+            );
+            scene.add(atmosphere);
+
+            const orbit = new THREE.Mesh(
+                new THREE.TorusGeometry(3.05, 0.006, 8, 200),
+                new THREE.MeshBasicMaterial({ color: 0x9fc3ff, transparent: true, opacity: 0.35 })
+            );
+            orbit.rotation.x = Math.PI / 2.35;
+            orbit.rotation.y = 0.25;
+            scene.add(orbit);
+
+            const satellite = new THREE.Mesh(
+                new THREE.SphereGeometry(0.06, 16, 12),
+                new THREE.MeshBasicMaterial({ color: 0xffffff })
+            );
+            scene.add(satellite);
+
+            scene.add(new THREE.AmbientLight(0x3a4a70, 0.5));
+
+            const sun = new THREE.DirectionalLight(0xffffff, 3);
+            sun.position.set(-6, 3, 5);
+            scene.add(sun);
+
+            function resize() {
+                const size = earthCanvas.clientWidth;
+                renderer.setSize(size, size, false);
+            }
+
+            resize();
+            window.addEventListener("resize", resize);
+
+            let pointerX = 0;
+            let pointerY = 0;
+
+            window.addEventListener("pointermove", (event) => {
+                pointerX = (event.clientX / window.innerWidth - 0.5) * 0.3;
+                pointerY = (event.clientY / window.innerHeight - 0.5) * 0.2;
+            });
+
+            const tilt = new THREE.Euler();
+
+            /* Drag to spin: horizontal turns the Earth, vertical tilts it.
+               Releasing keeps some momentum, then the slow auto-spin resumes. */
+            const globe = new THREE.Group();
+            scene.remove(earth);
+            globe.add(earth);
+            scene.add(globe);
+
+            const drag = { active: false, id: null, x: 0, y: 0, vx: 0, vy: 0 };
+            let spin = 0;
+            let pitch = 0;
+
+            earthCanvas.addEventListener("pointerdown", (event) => {
+                drag.active = true;
+                drag.id = event.pointerId;
+                drag.x = event.clientX;
+                drag.y = event.clientY;
+                drag.vx = 0;
+                drag.vy = 0;
+                earthCanvas.classList.add("is-dragging");
+                visual.classList.add("was-dragged");
+
+                try {
+                    earthCanvas.setPointerCapture(event.pointerId);
+                } catch (error) {
+                    /* Capture is optional. */
+                }
+            });
+
+            earthCanvas.addEventListener("pointermove", (event) => {
+                if (!drag.active || event.pointerId !== drag.id) {
+                    return;
+                }
+
+                const dx = event.clientX - drag.x;
+                const dy = event.clientY - drag.y;
+
+                drag.x = event.clientX;
+                drag.y = event.clientY;
+                drag.vx = dx * 0.008;
+                drag.vy = dy * 0.006;
+
+                spin += drag.vx;
+                pitch = Math.max(-0.7, Math.min(0.7, pitch + drag.vy));
+
+                if (reduceMotion) {
+                    globe.rotation.set(pitch, spin, 0);
+                    renderer.render(scene, camera);
+                }
+            });
+
+            ["pointerup", "pointercancel", "lostpointercapture"].forEach((type) => {
+                earthCanvas.addEventListener(type, () => {
+                    drag.active = false;
+                    earthCanvas.classList.remove("is-dragging");
+                });
+            });
+
+            let lastTime = performance.now();
+
+            function frame(time) {
+                const t = time / 1000;
+                const dt = Math.min(0.05, (time - lastTime) / 1000);
+                lastTime = time;
+
+                if (!drag.active) {
+                    spin += drag.vx + dt * 0.08;
+                    pitch = Math.max(-0.7, Math.min(0.7, pitch + drag.vy));
+                    drag.vx *= 0.94;
+                    drag.vy *= 0.9;
+                    pitch *= 0.985;
+                }
+
+                globe.rotation.set(pitch, spin, 0);
+                tilt.set(orbit.rotation.x, orbit.rotation.y, 0);
+
+                const angle = t * 0.45;
+                const position = new THREE.Vector3(Math.cos(angle) * 3.05, Math.sin(angle) * 3.05, 0).applyEuler(tilt);
+                satellite.position.copy(position);
+
+                scene.rotation.x += (pointerY - scene.rotation.x) * 0.05;
+                scene.rotation.y += (pointerX - scene.rotation.y) * 0.05;
+
+                renderer.render(scene, camera);
+
+                if (!reduceMotion) {
+                    requestAnimationFrame(frame);
+                }
+            }
+
+            requestAnimationFrame(frame);
+        })();
+
+
+        /* ---------- counters ---------- */
+
+        (function counters() {
+            if (reduceMotion || !("IntersectionObserver" in window)) {
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    const element = entry.target;
+                    const target = Number(element.dataset.count);
+                    const suffix = element.dataset.suffix || "";
+                    const start = performance.now();
+
+                    observer.unobserve(element);
+
+                    (function tick(now) {
+                        const progress = Math.min(1, (now - start) / 1200);
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        element.textContent = Math.round(target * eased) + (element.dataset.suffix || suffix);
+
+                        if (progress < 1) {
+                            requestAnimationFrame(tick);
+                        }
+                    })(start);
+                });
+            }, { threshold: 0.6 });
+
+            document.querySelectorAll("[data-count]").forEach((element) => observer.observe(element));
+        })();
+
+
+        /* ---------- 3D tilt on project images ---------- */
+
+        if (!reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+            document.querySelectorAll(".media").forEach((media) => {
+                media.addEventListener("pointermove", (event) => {
+                    const rect = media.getBoundingClientRect();
+                    const x = (event.clientX - rect.left) / rect.width - 0.5;
+                    const y = (event.clientY - rect.top) / rect.height - 0.5;
+                    media.style.transform = `perspective(900px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+                });
+
+                media.addEventListener("pointerleave", () => {
+                    media.style.transform = "";
+                });
+            });
+        }
+
+
+        /* ---------- copy buttons ---------- */
+
+        document.querySelectorAll("[data-copy]").forEach((button) => {
+            button.addEventListener("click", () => {
+                const target = document.getElementById(button.dataset.copy);
+                const text = target.textContent.trim();
+
+                const done = () => {
+                    button.textContent = currentLanguage === "fr" ? "Copié ✓" : "Copied ✓";
+
+                    setTimeout(() => {
+                        button.textContent = currentLanguage === "fr" ? button.dataset.fr : button.dataset.en;
+                    }, 1600);
+                };
+
+                const selectText = () => {
+                    const range = document.createRange();
+                    range.selectNodeContents(target);
+
+                    const selection = window.getSelection();
+                    selection.removeAllRanges();
+                    selection.addRange(range);
+                };
+
+                try {
+                    navigator.clipboard.writeText(text).then(done, selectText);
+                } catch (error) {
+                    selectText();
+                }
+            });
+        });
+
+
+        /* ---------- game modal ---------- */
+
+        function stopCurrentGame() {
+            if (typeof currentGameCleanup === "function") {
+                currentGameCleanup();
+            }
+
+            currentGameCleanup = null;
+            activeGame = null;
+        }
+
+
+        function openGame(game) {
+            stopCurrentGame();
+            activeGame = game;
+
+            gameModal.classList.add("open");
+            gameModal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("game-open");
+
+            currentGameCleanup = game === "hangman" ? startHangman() : startDodge();
+        }
+
+
+        function closeGame() {
+            stopCurrentGame();
+
+            gameModal.classList.remove("open");
+            gameModal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("game-open");
+        }
+
+
+        document.querySelectorAll(".game-launch").forEach((button) => {
+            button.addEventListener("click", () => openGame(button.dataset.game));
+        });
+
+        document.querySelector("#game-close").addEventListener("click", closeGame);
+        document.querySelector("[data-game-close]").addEventListener("click", closeGame);
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && gameModal.classList.contains("open")) {
+                closeGame();
+            }
+        });
+    </script>
+
+    <script src="games.js"></script>
+
+    <script src="dodge.js"></script>
+
+</body>
+
+</html>
