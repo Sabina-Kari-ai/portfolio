@@ -10,7 +10,7 @@
 
     <meta
         name="description"
-        content="Portfolio de Sabina Karimova, étudiante Pré-MSc Pro à EPITECH Nantes, à la recherche d'une alternance IT en contrat d'apprentissage dès janvier 2027 : projet PHP/MariaDB en cours, jeux en Python et JavaScript, CV numérique."
+        content="Portfolio de Sabina Karimova, étudiante Pré-MSc Pro à EPITECH Nantes, à la recherche d'une alternance IT en contrat d'apprentissage dès janvier 2027 : plateforme PHP/MariaDB en équipe, portfolio et CV numérique, jeux en Python et JavaScript."
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -377,26 +377,6 @@
             100% {
                 box-shadow: 0 0 0 0 rgba(111, 227, 160, 0);
             }
-        }
-
-        .hero-photo {
-            position: relative;
-            display: block;
-            width: 112px;
-            height: 112px;
-            margin-bottom: 22px;
-            padding: 3px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-strong), var(--glow));
-            box-shadow: 0 0 0 6px rgba(95, 168, 255, 0.12), 0 18px 50px -12px rgba(95, 168, 255, 0.55);
-        }
-
-        .hero-photo img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--bg);
         }
 
         .hero-name {
@@ -840,9 +820,9 @@
         .wip-body em {
             justify-self: center;
             padding: 4px 12px;
-            border: 1px solid rgba(255, 196, 92, 0.4);
+            border: 1px solid rgba(95, 168, 255, 0.4);
             border-radius: 999px;
-            color: #ffc45c;
+            color: var(--accent);
             font-style: normal;
             font-size: 0.78rem;
         }
@@ -1283,6 +1263,45 @@
             background: linear-gradient(90deg, var(--accent-strong), var(--glow));
         }
 
+
+        .cv-portrait {
+            position: relative;
+            max-width: 400px;
+            margin: 28px 0 0 52px;
+            padding: 3px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--accent-strong), var(--glow));
+            box-shadow: 0 30px 70px -30px rgba(95, 168, 255, 0.55);
+        }
+
+        .cv-portrait img {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 507 / 586;
+            object-fit: cover;
+            border-radius: calc(var(--radius) - 3px);
+        }
+
+        .cv-portrait figcaption {
+            position: absolute;
+            inset: auto 3px 3px 3px;
+            display: grid;
+            gap: 2px;
+            padding: 48px 20px 18px;
+            border-radius: 0 0 calc(var(--radius) - 3px) calc(var(--radius) - 3px);
+            background: linear-gradient(transparent, rgba(2, 5, 10, 0.9));
+        }
+
+        .cv-portrait small {
+            color: var(--text-soft);
+        }
+
+        @media (max-width: 1000px) {
+            .cv-portrait {
+                margin: 28px auto 0;
+            }
+        }
 
         .cv-preview {
             position: relative;
@@ -1799,10 +1818,6 @@
                 <div class="hero-grid">
 
                     <div>
-                        <span class="hero-photo rise" style="--d: 0s">
-                            <img src="assets/img/sabina.webp" alt="Photo de Sabina Karimova" data-alt-fr="Photo de Sabina Karimova" data-alt-en="Photo of Sabina Karimova" width="320" height="320">
-                        </span>
-
                         <span class="badge rise" style="--d: .05s">
                             <i class="pulse" aria-hidden="true"></i>
                             <span data-fr="Alternance IT · Contrat d'apprentissage · janvier 2027" data-en="IT apprenticeship contract · January 2027">Alternance IT · Contrat d'apprentissage · janvier 2027</span>
@@ -1859,8 +1874,8 @@
                 <div class="stats rise" style="--d: .6s">
 
                     <div class="stat">
-                        <strong data-count="3">3</strong>
-                        <span data-fr="projets publiés" data-en="published projects">projets publiés</span>
+                        <strong data-count="5">5</strong>
+                        <span data-fr="projets réalisés" data-en="projects built">projets réalisés</span>
                     </div>
 
                     <div class="stat">
@@ -1896,18 +1911,67 @@
 
                     <p
                         class="section-lead"
-                        data-fr="Mon projet EPITECH en cours, puis deux jeux écrits d'abord en Python avec Pygame et recréés pour le web. Cliquez sur une image pour jouer."
-                        data-en="My ongoing EPITECH project, then two games first written in Python with Pygame and rebuilt for the web. Click an image to play."
+                        data-fr="Mes projets EPITECH (ce portfolio et une plateforme web en équipe), mon CV numérique, puis deux jeux écrits d'abord en Python avec Pygame et recréés pour le web. Cliquez sur une image pour jouer."
+                        data-en="My EPITECH projects (this portfolio and a team web platform), my digital resume, then two games first written in Python with Pygame and rebuilt for the web. Click an image to play."
                     >
-                        Mon projet EPITECH en cours, puis deux jeux écrits d'abord en Python avec Pygame
-                        et recréés pour le web. Cliquez sur une image pour jouer.
+                        Mes projets EPITECH (ce portfolio et une plateforme web en équipe), mon CV numérique,
+                        puis deux jeux écrits d'abord en Python avec Pygame et recréés pour le web.
+                        Cliquez sur une image pour jouer.
                     </p>
                 </div>
 
 
-                <!-- JobBoard -->
+                <!-- Portfolio -->
 
                 <article class="project">
+
+                    <a class="media" href="#top" aria-label="Revenir en haut du portfolio">
+                        <img src="assets/games/previews/portfolio.webp" alt="Aperçu du portfolio de Sabina Karimova : fond étoilé, Terre en 3D et présentation" data-alt-fr="Aperçu du portfolio de Sabina Karimova : fond étoilé, Terre en 3D et présentation" data-alt-en="Preview of Sabina Karimova's portfolio: starry background, 3D Earth and introduction" width="1200" height="900" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">↑</span>
+                            <span data-fr="Vous êtes ici" data-en="You are here">Vous êtes ici</span>
+                        </span>
+                    </a>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Site web · Projet EPITECH" data-en="Website · EPITECH project">Site web · Projet EPITECH</span>
+                            <span class="status" data-fr="En ligne" data-en="Live">En ligne</span>
+                        </div>
+
+                        <h3>Portfolio</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Le site que vous visitez : mes projets, mes compétences et mon parcours réunis sur une seule page, codée sans framework."
+                            data-en="The site you are visiting: my projects, skills and background on a single page, coded without a framework."
+                        >
+                            Le site que vous visitez : mes projets, mes compétences et mon parcours
+                            réunis sur une seule page, codée sans framework.
+                        </p>
+
+                        <ul class="features">
+                            <li data-fr="Terre en 3D interactive et fond étoilé animé" data-en="Interactive 3D Earth and animated starry background">Terre en 3D interactive et fond étoilé animé</li>
+                            <li data-fr="Deux jeux jouables directement dans la page" data-en="Two games playable right on the page">Deux jeux jouables directement dans la page</li>
+                            <li data-fr="Bilingue français / anglais, responsive et accessible" data-en="Bilingual French / English, responsive and accessible">Bilingue français / anglais, responsive et accessible</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- JobBoard -->
+
+                <article class="project reverse">
 
                     <div class="media media-wip" aria-hidden="true">
                         <div class="wip-window">
@@ -1915,7 +1979,7 @@
                             <div class="wip-body">
                                 <strong>&lt;?php</strong>
                                 <span>PHP · MariaDB · Git/GitHub</span>
-                                <em data-fr="Projet en cours de développement" data-en="Work in progress">Projet en cours de développement</em>
+                                <em data-fr="Projet d'équipe EPITECH" data-en="EPITECH team project">Projet d'équipe EPITECH</em>
                             </div>
                         </div>
                     </div>
@@ -1924,7 +1988,6 @@
 
                         <div class="project-kicker">
                             <span data-fr="Web · Projet d'équipe EPITECH" data-en="Web · EPITECH team project">Web · Projet d'équipe EPITECH</span>
-                            <span class="status status-wip" data-fr="En cours" data-en="In progress">En cours</span>
                         </div>
 
                         <h3>JobBoard</h3>
@@ -1939,8 +2002,8 @@
                         </p>
 
                         <ul class="features">
-                            <li data-fr="Travail sur l'authentification utilisateur" data-en="Working on user authentication">Travail sur l'authentification utilisateur</li>
-                            <li data-fr="Travail sur la gestion des données (MariaDB)" data-en="Working on data management (MariaDB)">Travail sur la gestion des données (MariaDB)</li>
+                            <li data-fr="Authentification des utilisateurs" data-en="User authentication">Authentification des utilisateurs</li>
+                            <li data-fr="Gestion des données avec MariaDB" data-en="Data management with MariaDB">Gestion des données avec MariaDB</li>
                             <li data-fr="Travail en équipe avec Git/GitHub" data-en="Teamwork with Git/GitHub">Travail en équipe avec Git/GitHub</li>
                         </ul>
 
@@ -1949,6 +2012,61 @@
                             <span>MariaDB</span>
                             <span>Git · GitHub</span>
                             <span data-fr="Authentification" data-en="Authentication">Authentification</span>
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Digital CV -->
+
+                <article class="project">
+
+                    <a aria-label='Ouvrir le CV numérique' class='media cv-link' href='/cv'>
+                        <img src="assets/games/previews/cv.jpg" alt="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-fr="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-en="Preview of Sabina Karimova's digital resume with a 3D globe" width="800" height="504" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">↗</span>
+                            <span data-fr="Visiter le site" data-en="Visit the site">Visiter le site</span>
+                        </span>
+                    </a>
+
+                    <div class="project-body">
+
+                        <div class="project-kicker">
+                            <span data-fr="Site web" data-en="Website">Site web</span>
+                            <span class="status" data-fr="En ligne" data-en="Live">En ligne</span>
+                        </div>
+
+                        <h3 data-fr="CV numérique" data-en="Digital resume">CV numérique</h3>
+
+                        <p
+                            class="project-text"
+                            data-fr="Mon CV sous forme de site, codé sans framework, avec un globe terrestre en 3D et les deux jeux intégrés."
+                            data-en="My resume as a website, coded without a framework, with a 3D globe and both games built in."
+                        >
+                            Mon CV sous forme de site, codé sans framework,
+                            avec un globe terrestre en 3D et les deux jeux intégrés.
+                        </p>
+
+                        <ul class="features">
+                            <li data-fr="Bilingue français / anglais" data-en="Bilingual French / English">Bilingue français / anglais</li>
+                            <li data-fr="Responsive : ordinateur, tablette et mobile" data-en="Responsive: desktop, tablet and mobile">Responsive : ordinateur, tablette et mobile</li>
+                            <li data-fr="Animations et globe Three.js" data-en="Animations and a Three.js globe">Animations et globe Three.js</li>
+                        </ul>
+
+                        <div class="tags">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Three.js</span>
+                        </div>
+
+                        <div class="project-actions">
+                            <a class='btn btn-primary cv-link' href='/cv'>
+                                <span data-fr="Voir le CV" data-en="See the resume">Voir le CV</span>
+                                <span aria-hidden="true">↗</span>
+                            </a>
                         </div>
 
                     </div>
@@ -2083,60 +2201,6 @@
                 </article>
 
 
-                <!-- Digital CV -->
-
-                <article class="project reverse">
-
-                    <a aria-label='Ouvrir le CV numérique' class='media cv-link' href='/cv'>
-                        <img src="assets/games/previews/cv.jpg" alt="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-fr="Aperçu du CV numérique de Sabina Karimova avec un globe terrestre en 3D" data-alt-en="Preview of Sabina Karimova's digital resume with a 3D globe" width="800" height="504" loading="lazy">
-                        <span class="play">
-                            <span class="play-icon" aria-hidden="true">↗</span>
-                            <span data-fr="Visiter le site" data-en="Visit the site">Visiter le site</span>
-                        </span>
-                    </a>
-
-                    <div class="project-body">
-
-                        <div class="project-kicker">
-                            <span data-fr="Site web" data-en="Website">Site web</span>
-                            <span class="status" data-fr="En ligne" data-en="Live">En ligne</span>
-                        </div>
-
-                        <h3 data-fr="CV numérique" data-en="Digital resume">CV numérique</h3>
-
-                        <p
-                            class="project-text"
-                            data-fr="Mon CV sous forme de site, codé sans framework, avec un globe terrestre en 3D et les deux jeux intégrés."
-                            data-en="My resume as a website, coded without a framework, with a 3D globe and both games built in."
-                        >
-                            Mon CV sous forme de site, codé sans framework,
-                            avec un globe terrestre en 3D et les deux jeux intégrés.
-                        </p>
-
-                        <ul class="features">
-                            <li data-fr="Bilingue français / anglais" data-en="Bilingual French / English">Bilingue français / anglais</li>
-                            <li data-fr="Responsive : ordinateur, tablette et mobile" data-en="Responsive: desktop, tablet and mobile">Responsive : ordinateur, tablette et mobile</li>
-                            <li data-fr="Animations et globe Three.js" data-en="Animations and a Three.js globe">Animations et globe Three.js</li>
-                        </ul>
-
-                        <div class="tags">
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                            <span>Three.js</span>
-                        </div>
-
-                        <div class="project-actions">
-                            <a class='btn btn-primary cv-link' href='/cv'>
-                                <span data-fr="Voir le CV" data-en="See the resume">Voir le CV</span>
-                                <span aria-hidden="true">↗</span>
-                            </a>
-                        </div>
-
-                    </div>
-
-                </article>
-
             </div>
         </section>
 
@@ -2159,7 +2223,7 @@
 
                         <ul class="skill-list">
                             <li><strong>Python</strong><small data-fr="Premières versions des deux jeux" data-en="First versions of both games">Premières versions des deux jeux</small></li>
-                            <li><strong>PHP</strong><small data-fr="JobBoard (projet en cours)" data-en="JobBoard (in progress)">JobBoard (projet en cours)</small></li>
+                            <li><strong>PHP</strong><small data-fr="JobBoard, projet d'équipe EPITECH" data-en="JobBoard, EPITECH team project">JobBoard, projet d'équipe EPITECH</small></li>
                             <li><strong>JavaScript</strong><small data-fr="Jeux web, CV et portfolio" data-en="Web games, resume and portfolio">Jeux web, CV et portfolio</small></li>
                             <li><strong>HTML · CSS</strong><small data-fr="Mises en page responsive, Grid, Flexbox" data-en="Responsive layouts, Grid, Flexbox">Mises en page responsive, Grid, Flexbox</small></li>
                         </ul>
@@ -2172,7 +2236,7 @@
                         <ul class="skill-list">
                             <li><strong>Three.js · WebGL</strong><small data-fr="Globe du CV, Dodge Game en 3D" data-en="Resume globe, Dodge Game in 3D">Globe du CV, Dodge Game en 3D</small></li>
                             <li><strong>Pygame · Canvas</strong><small data-fr="Boucles de jeu et interfaces graphiques" data-en="Game loops and graphical interfaces">Boucles de jeu et interfaces graphiques</small></li>
-                            <li><strong>SQL · MariaDB</strong><small data-fr="Bases de données, JobBoard en cours" data-en="Databases, ongoing job board">Bases de données, JobBoard en cours</small></li>
+                            <li><strong>SQL · MariaDB</strong><small data-fr="Bases de données du JobBoard" data-en="Job board databases">Bases de données du JobBoard</small></li>
                             <li><strong>Git · GitHub</strong><small data-fr="Versionnement et travail en équipe" data-en="Version control and teamwork">Versionnement et travail en équipe</small></li>
                             <li><strong>Bash · Linux · PowerShell</strong><small data-fr="Ligne de commande" data-en="Command line">Ligne de commande</small></li>
                         </ul>
@@ -2362,6 +2426,14 @@
                             </li>
 
                         </ol>
+
+                        <figure class="cv-portrait">
+                            <img src="assets/img/sabina-portrait.webp" alt="Portrait de Sabina Karimova" data-alt-fr="Portrait de Sabina Karimova" data-alt-en="Portrait of Sabina Karimova" width="507" height="586" loading="lazy">
+                            <figcaption>
+                                <b>Sabina Karimova</b>
+                                <small data-fr="Développeuse en formation · EPITECH Nantes" data-en="Developer in training · EPITECH Nantes">Développeuse en formation · EPITECH Nantes</small>
+                            </figcaption>
+                        </figure>
 
                     </div>
 
