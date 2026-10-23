@@ -751,80 +751,8 @@
             font-size: 0.74rem;
         }
 
-        .status-wip {
-            border-color: rgba(255, 196, 92, 0.4);
-            color: #ffc45c;
-        }
-
-        .media-wip {
-            display: grid;
-            place-items: center;
-            padding: 8%;
-            background:
-                radial-gradient(circle at 30% 20%, rgba(124, 92, 255, 0.35), transparent 60%),
-                radial-gradient(circle at 80% 90%, rgba(95, 168, 255, 0.25), transparent 55%),
-                #050a14;
-        }
-
-        .media-wip::after {
-            display: none;
-        }
-
-        .wip-window {
-            width: 100%;
-            border: 1px solid var(--line-strong);
-            border-radius: 14px;
-            background: rgba(7, 13, 24, 0.85);
-            overflow: hidden;
-        }
-
-        .wip-bar {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--line);
-            color: var(--text-muted);
-            font-size: 0.78rem;
-        }
-
-        .wip-bar i {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--line-strong);
-        }
-
-        .wip-bar span {
-            margin-left: 8px;
-        }
-
-        .wip-body {
-            display: grid;
-            gap: 10px;
-            padding: 28px 22px 30px;
-            text-align: center;
-        }
-
-        .wip-body strong {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3rem);
-            color: var(--accent);
-        }
-
-        .wip-body span {
-            color: var(--text-soft);
-            font-size: 0.9rem;
-        }
-
-        .wip-body em {
-            justify-self: center;
-            padding: 4px 12px;
-            border: 1px solid rgba(95, 168, 255, 0.4);
-            border-radius: 999px;
-            color: var(--accent);
-            font-style: normal;
-            font-size: 0.78rem;
+        .media-static {
+            cursor: default;
         }
 
         .status::before {
@@ -1973,15 +1901,9 @@
 
                 <article class="project reverse">
 
-                    <div class="media media-wip" aria-hidden="true">
-                        <div class="wip-window">
-                            <div class="wip-bar"><i></i><i></i><i></i><span>JobBoard</span></div>
-                            <div class="wip-body">
-                                <strong>&lt;?php</strong>
-                                <span>PHP · MariaDB · Git/GitHub</span>
-                                <em data-fr="Projet d'équipe EPITECH" data-en="EPITECH team project">Projet d'équipe EPITECH</em>
-                            </div>
-                        </div>
+                    <div class="media media-static">
+                        <img src="assets/games/previews/jobboard.webp" alt="Capture du JobBoard : page d'accueil avec la recherche d'emploi et la liste des offres" data-alt-fr="Capture du JobBoard : page d'accueil avec la recherche d'emploi et la liste des offres" data-alt-en="JobBoard screenshot: home page with job search and the list of offers" width="1200" height="900" loading="lazy">
+                        <img class="media-inset" src="assets/games/previews/jobboard-offre.webp" alt="JobBoard : détail d'une offre" data-alt-fr="JobBoard : détail d'une offre" data-alt-en="JobBoard: job offer details" width="800" height="600" loading="lazy">
                     </div>
 
                     <div class="project-body">
