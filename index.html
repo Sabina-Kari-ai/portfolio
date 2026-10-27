@@ -751,10 +751,6 @@
             font-size: 0.74rem;
         }
 
-        .media-static {
-            cursor: default;
-        }
-
         .status::before {
             content: "";
             width: 6px;
@@ -1385,6 +1381,47 @@
         }
 
 
+        /* ---------- screenshot viewer ---------- */
+
+        .shots-dialog {
+            width: min(1100px, 100%);
+        }
+
+        .shots-view {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: calc(100vh - 230px);
+            object-fit: contain;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .shots-thumbs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .shots-thumb {
+            padding: 6px 14px;
+            border: 1px solid var(--line-strong);
+            border-radius: 999px;
+            background: transparent;
+            color: var(--text-soft);
+            font: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .shots-thumb[aria-pressed="true"] {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+
         /* ---------- game modal ---------- */
 
         .game-modal {
@@ -1901,10 +1938,14 @@
 
                 <article class="project reverse">
 
-                    <div class="media media-static">
+                    <button class="media shots-launch" type="button" data-shot="0" aria-label="Voir les captures du JobBoard">
                         <img src="assets/games/previews/jobboard.webp" alt="Capture du JobBoard : page d'accueil avec la recherche d'emploi et la liste des offres" data-alt-fr="Capture du JobBoard : page d'accueil avec la recherche d'emploi et la liste des offres" data-alt-en="JobBoard screenshot: home page with job search and the list of offers" width="1200" height="900" loading="lazy">
-                        <img class="media-inset" src="assets/games/previews/jobboard-offre.webp" alt="JobBoard : détail d'une offre" data-alt-fr="JobBoard : détail d'une offre" data-alt-en="JobBoard: job offer details" width="800" height="600" loading="lazy">
-                    </div>
+                        <img class="media-inset" src="assets/games/previews/jobboard-offre.webp" alt="JobBoard : détail d'une offre" data-alt-fr="JobBoard : détail d'une offre" data-alt-en="JobBoard: job offer details" width="1200" height="900" loading="lazy">
+                        <span class="play">
+                            <span class="play-icon" aria-hidden="true">⤢</span>
+                            <span data-fr="Voir les captures" data-en="View screenshots">Voir les captures</span>
+                        </span>
+                    </button>
 
                     <div class="project-body">
 
@@ -1934,6 +1975,13 @@
                             <span>MariaDB</span>
                             <span>Git · GitHub</span>
                             <span data-fr="Authentification" data-en="Authentication">Authentification</span>
+                        </div>
+
+                        <div class="project-actions">
+                            <button class="btn btn-primary shots-launch" type="button" data-shot="0">
+                                <span data-fr="Voir les captures" data-en="View screenshots">Voir les captures</span>
+                                <span aria-hidden="true">⤢</span>
+                            </button>
                         </div>
 
                     </div>
@@ -2524,6 +2572,35 @@
             <span data-fr="Sons : Kenney (CC0) · Terre : NASA · Photos : Unsplash" data-en="Sounds: Kenney (CC0) · Earth: NASA · Photos: Unsplash">Sons : Kenney (CC0) · Terre : NASA · Photos : Unsplash</span>
         </div>
     </footer>
+
+
+    <!-- SCREENSHOT VIEWER (JobBoard) -->
+
+    <div class="game-modal" id="shots-modal" aria-hidden="true">
+
+        <div class="game-modal-backdrop" data-shots-close></div>
+
+        <section class="game-dialog shots-dialog" role="dialog" aria-modal="true" aria-labelledby="shots-title">
+
+            <div class="game-dialog-header">
+                <div>
+                    <p class="game-kicker" data-fr="Captures du projet" data-en="Project screenshots">Captures du projet</p>
+                    <h2 id="shots-title">JobBoard</h2>
+                </div>
+
+                <button class="game-close" id="shots-close" type="button" aria-label="Fermer">×</button>
+            </div>
+
+            <img class="shots-view" id="shots-view" src="assets/games/previews/jobboard.webp" alt="" width="1200" height="900">
+
+            <div class="shots-thumbs">
+                <button class="shots-thumb" type="button" data-shot="0" data-fr="Page d'accueil et offres" data-en="Home page and offers">Page d'accueil et offres</button>
+                <button class="shots-thumb" type="button" data-shot="1" data-fr="Détail d'une offre" data-en="Job offer details">Détail d'une offre</button>
+            </div>
+
+        </section>
+
+    </div>
 
 
     <!-- GAME MODAL (shared with games.js / dodge.js) -->
@@ -3247,6 +3324,54 @@
         window.addEventListener("keydown", (event) => {
             if (event.key === "Escape" && gameModal.classList.contains("open")) {
                 closeGame();
+            }
+        });
+
+
+        /* Screenshot viewer for the JobBoard card */
+        const shotsModal = document.querySelector("#shots-modal");
+        const shotsView = document.querySelector("#shots-view");
+        const shots = [
+            { src: "assets/games/previews/jobboard.webp", fr: "Capture du JobBoard : page d'accueil avec la recherche d'emploi et la liste des offres", en: "JobBoard screenshot: home page with job search and the list of offers" },
+            { src: "assets/games/previews/jobboard-offre.webp", fr: "JobBoard : détail d'une offre", en: "JobBoard: job offer details" }
+        ];
+
+        function showShot(index) {
+            const shot = shots[index];
+            shotsView.src = shot.src;
+            shotsView.alt = currentLanguage === "fr" ? shot.fr : shot.en;
+            document.querySelectorAll(".shots-thumb").forEach((thumb) => {
+                thumb.setAttribute("aria-pressed", String(Number(thumb.dataset.shot) === index));
+            });
+        }
+
+        function openShots(index) {
+            showShot(index);
+            shotsModal.classList.add("open");
+            shotsModal.setAttribute("aria-hidden", "false");
+            document.body.classList.add("game-open");
+        }
+
+        function closeShots() {
+            shotsModal.classList.remove("open");
+            shotsModal.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("game-open");
+        }
+
+        document.querySelectorAll(".shots-launch").forEach((button) => {
+            button.addEventListener("click", () => openShots(Number(button.dataset.shot)));
+        });
+
+        document.querySelectorAll(".shots-thumb").forEach((thumb) => {
+            thumb.addEventListener("click", () => showShot(Number(thumb.dataset.shot)));
+        });
+
+        document.querySelector("#shots-close").addEventListener("click", closeShots);
+        document.querySelector("[data-shots-close]").addEventListener("click", closeShots);
+
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && shotsModal.classList.contains("open")) {
+                closeShots();
             }
         });
     </script>
