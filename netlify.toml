@@ -1,0 +1,5 @@
+# Publication automatique sur Netlify : chaque push sur la branche liée
+# déclenche un nouveau déploiement de la racine du dépôt (aucun build).
+
+[build]
+  publish = "."
